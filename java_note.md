@@ -4646,7 +4646,11 @@ class InnerInherit extends WithInner.Inner
 
 ## Java设计模式
 
+总的来说设计模式分为三大类：
 
+创建型模式、结构型模式和行为型模式。
+
+#### 创建模型(5种)
 
 
 
