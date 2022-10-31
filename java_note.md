@@ -4646,12 +4646,377 @@ class InnerInherit extends WithInner.Inner
 
 ## Java设计模式
 
-总的来说设计模式分为三大类：
+设计模式（Design pattern）是一套被反复使用、多数人知晓的、经过分类编目的、代码设计经验的总结。
 
-创建型模式、结构型模式和行为型模式。
+使用设计模式是为了可重用代码、让代码更容易被他人理解、保证代码可靠性。 毫无疑问，设计模式于己于他人于系统都是多赢的，设计模式使代码编制真正工程化，设计模式是软件工程的基石，如同大厦的一块块砖石一样。项目中合理的运用设计模式可以完美的解决很多问题，每种模式在现在中都有相应的原理来与之对应，每一个模式描述了一个在我们周围不断重复发生的问题，以及该问题的核心解决方案，这也是它能被广泛应用的原因。简单说：
 
-#### 创建模型(5种)
+模式：在某些场景下，针对某类问题的某种通用的解决方案。
+
+场景：项目所在的环境
+
+问题：约束条件，项目目标等
+
+解决方案：通用、可复用的设计，解决约束达到目标。
 
 
+
+**设计模式的三个分类**
+
+**创建型模式**：对象实例化的模式，创建型模式用于解耦对象的实例化过程。
+
+**结构型模式**：把类或对象结合在一起形成一个更大的结构。
+
+**行为型模式**：类和对象如何交互，及划分责任和算法。
+
+
+
+![aefc6eb7f5ba13216d5f21051327816e](.\image\Design_Pattern\aefc6eb7f5ba13216d5f21051327816e.png)
+
+
+
+**各个模式之间的关系**：
+
+![](C:\Users\Administrator\Desktop\github repo\Learing_note\image\Design_Pattern\98a09316240cb0dff94f39874a392657.jpg)
+
+### 1. 工厂方法模式
+
+定义了一个创建对象的接口，但由子类决定要实例化哪个类。工厂方法把实例化操作推迟到子类。
+
+![image-20221031092451805](C:\Users\Administrator\Desktop\github repo\Learing_note\image\Design_Pattern\image-20221031092451805.png)
+
+
+
+工厂模式（Factory Pattern）的意义就跟它的名字一样，在面向对象程序设计中，工厂通常是一个用来创建其他对象的对象。工厂模式根据不同的参数来实现不同的分配方案和创建对象。
+
+在工厂模式中，我们在创建对象时不会对客户端暴露创建逻辑，并且是通过使用一个共同的接口来指向新创建的对象。
+
+
+**具体应用:**
+
+![image-20221031092934462](C:\Users\Administrator\Desktop\github repo\Learing_note\image\Design_Pattern\image-20221031092934462.png)
+
+
+
+```java
+// 二者共同的接口
+interface Human{
+    public void eat();
+    public void sleep();
+    public void beat();
+}
+
+// 创建实现类 Male
+class Male implements Human{
+    public void eat(){
+        System.out.println("Male can eat.");
+    }
+    public void sleep(){
+        System.out.println("Male can sleep.");
+    }
+    public void beat(){
+        System.out.println("Male can beat.");
+    }
+}
+//创建实现类 Female
+class Female implements Human{
+    public void eat(){
+        System.out.println("Female can eat.");
+    }
+    public void sleep(){
+        System.out.println("Female can sleep.");
+    }
+    public void beat(){
+        System.out.println("Female can beat.");
+    }
+}
+
+// 创建普通工厂类
+class HumanFactory{
+    public Human createHuman(String gender){
+        if( gender.equals("male") ){
+           return new Male();
+        }else if( gender.equals("female")){
+           return new Female();
+        }else {
+            System.out.println("请输入正确的类型！");
+            return null;
+        }
+    }
+}
+
+// 工厂测试类
+public class FactoryTest {
+    public static void main(String[] args){
+        HumanFactory factory = new HumanFactory();
+        Human male = factory.createHuman("male");
+        male.eat();
+        male.sleep();
+        male.beat();
+    }
+}
+
+```
+
+
+
+### 2.抽象工厂模式
+
+抽象工厂模式（Abstract Factory Pattern）是一种软件开发设计模式。抽象工厂模式提供了一种方式，可以将一组具有同一主题的单独的工厂封装起来。如果比较抽象工厂模式和工厂模式，我们不难发现前者只是在工厂模式之上增加了一层抽象的概念。抽象工厂是一个父类工厂，可以创建其它工厂类。所以我们也叫它 “工厂的工厂”。
+![image-20221031093344631](C:\Users\Administrator\Desktop\github repo\Learing_note\image\Design_Pattern\image-20221031093344631.png)
+
+
+
+抽象工厂模式特别适合于这样的一种产品结构：产品分为几个系列，在每个系列中，产品的布局都是类似的，在一个系列中某个位置的产品，在另一个系列中一定有一个对应的产品。这样的产品结构是存在的，这几个系列中同一位置的产品可能是互斥的，它们是针对不同客户的解决方案，每个客户都只选择其一。
+
+```java
+public class AbstractProductA {
+}
+public class AbstractProductB {
+}
+public class ProductA1 extends AbstractProductA {
+}
+public class ProductA2 extends AbstractProductA {
+}
+public class ProductB1 extends AbstractProductB {
+}
+public class ProductB2 extends AbstractProductB {
+}
+public abstract class AbstractFactory {
+    abstract AbstractProductA createProductA();
+    abstract AbstractProductB createProductB();
+}
+public class ConcreteFactory1 extends AbstractFactory {
+    AbstractProductA createProductA() {
+        return new ProductA1();
+    }
+
+    AbstractProductB createProductB() {
+        return new ProductB1();
+    }
+}
+public class ConcreteFactory2 extends AbstractFactory {
+    AbstractProductA createProductA() {
+        return new ProductA2();
+    }
+
+    AbstractProductB createProductB() {
+        return new ProductB2();
+    }
+}
+
+
+public class Client {
+    public static void main(String[] args) {
+        AbstractFactory abstractFactory = new ConcreteFactory1();
+      // 抽象出来的父类工厂,因为concreteFactory1与2的行为类似，如果单独使用concreateFactory1/2，那么就是工厂方法模式。
+        AbstractProductA productA = abstractFactory.createProductA();
+        AbstractProductB productB = abstractFactory.createProductB();
+        // do something with productA and productB
+    }
+}
+
+```
+
+
+
+**对比工厂方法模式与抽象工厂模式**
+
+先介绍两个概念：
+
+* 产品等级结构：比如一个抽象类是食物，其子类有苹果、牛奶等等，则抽象食物与具体食物名称之间构成了一个产品等级结构。食物是抽象的父类，而具体的食物名称是其子类。
+
+* 产品族：在抽象工厂模式中，产品族是指由同一个工厂生产的，位于不同产品等级结构中的一组产品。如 AKitchen 生产的苹果、刀子，苹果属于食物产品等级结构中，而刀子则属于餐具产品等级结构中。而 BKitchen 可能生成另一组产品，如牛奶、杯子。
+
+
+
+因此工厂方法模式、抽象工厂模式最大的区别在于：
+
+​	工厂方法模式：针对的是 一个产品等级结构。
+
+​	抽象工厂模式：针对多个产品等级结构，这些产品等级结构的布局类似，可以抽象为一个父类工厂。
+
+
+
+### Chapter 3 单例模式
+
+确保一个类只有一个实例，并提供该实例的全局访问点。
+
+使用一个私有构造函数、一个私有静态变量以及一个公有静态函数来实现。
+
+私有构造函数保证了不能通过构造函数来创建对象实例，只能通过公有静态函数返回唯一的私有静态变量。
+
+![image-20221031100119060](C:\Users\Administrator\Desktop\github repo\Learing_note\image\Design_Pattern\image-20221031100119060.png)
+
+
+
+**1.懒汉式-线程不安全**
+
+以下实现中，私有静态变量 uniqueInstance 被延迟实例化，这样做的好处是，如果没有用到该类，那么就不会实例化 uniqueInstance，从而节约资源。
+
+这个实现在多线程环境下是不安全的，如果多个线程能够同时进入 if (uniqueInstance == null) ，并且此时 uniqueInstance 为 null，那么会有多个线程执行 uniqueInstance = new Singleton(); 语句，这将导致实例化多次 uniqueInstance。
+
+```java
+public class Singleton {
+
+    private static Singleton uniqueInstance;
+
+    private Singleton() {
+    }
+
+    public static Singleton getUniqueInstance() {
+        if (uniqueInstance == null) {
+            uniqueInstance = new Singleton();
+        }
+        return uniqueInstance;
+    }
+}
+
+```
+
+
+
+**2.饿汉式-线程安全**
+
+线程不安全问题主要是由于 uniqueInstance 被实例化多次，采取直接实例化 uniqueInstance 的方式就不会产生线程不安全问题。
+
+但是直接实例化的方式也丢失了延迟实例化带来的节约资源的好处。
+
+```java
+private static Singleton uniqueInstance = new Singleton();
+```
+
+
+
+**3.懒汉式-线程安全**
+
+只需要对 getUniqueInstance() 方法加锁，那么在一个时间点只能有一个线程能够进入该方法，从而避免了实例化多次 uniqueInstance。
+
+但是当一个线程进入该方法之后，其它试图进入该方法的线程都必须等待，即使 uniqueInstance 已经被实例化了。这会让线程阻塞时间过长，因此该方法有性能问题，不推荐使用。
+
+```java
+public static synchronized Singleton getUniqueInstance() {
+    if (uniqueInstance == null) {
+        uniqueInstance = new Singleton();
+    }
+    return uniqueInstance;
+}
+
+```
+
+**4.双重校验锁-线程安全**
+uniqueInstance 只需要被实例化一次，之后就可以直接使用了。加锁操作只需要对实例化那部分的代码进行，只有当 uniqueInstance 没有被实例化时，才需要进行加锁。
+
+双重校验锁先判断 uniqueInstance 是否已经被实例化，如果没有被实例化，那么才对实例化语句进行加锁。
+
+```java
+public class Singleton {
+
+    private volatile static Singleton uniqueInstance;
+
+    private Singleton() {
+    }
+
+    public static Singleton getUniqueInstance() {
+        if (uniqueInstance == null) {
+            synchronized (Singleton.class) {
+                if (uniqueInstance == null) {
+                    uniqueInstance = new Singleton();
+                }
+            }
+        }
+        return uniqueInstance;
+    }
+}
+```
+
+
+
+**5.静态内部类实现**
+
+当 Singleton 类被加载时，静态内部类 SingletonHolder 没有被加载进内存。只有当调用 getUniqueInstance() 方法从而触发 SingletonHolder.INSTANCE 时 SingletonHolder 才会被加载，此时初始化 INSTANCE 实例，并且 JVM 能确保 INSTANCE 只被实例化一次。
+
+这种方式不仅具有延迟初始化的好处，而且由 JVM 提供了对线程安全的支持。
+
+```java
+public class Singleton {
+
+    private Singleton() {
+    }
+
+    private static class SingletonHolder {
+        private static final Singleton INSTANCE = new Singleton();
+    }
+
+    public static Singleton getUniqueInstance() {
+        return SingletonHolder.INSTANCE;
+    }
+}
+```
+
+
+
+**6.枚举实现**
+
+```java
+public enum Singleton {
+
+    INSTANCE;
+
+    private String objName;
+
+
+    public String getObjName() {
+        return objName;
+    }
+
+
+    public void setObjName(String objName) {
+        this.objName = objName;
+    }
+
+
+    public static void main(String[] args) {
+
+        // 单例测试
+        Singleton firstSingleton = Singleton.INSTANCE;
+        firstSingleton.setObjName("firstName");
+        System.out.println(firstSingleton.getObjName());
+        Singleton secondSingleton = Singleton.INSTANCE;
+        secondSingleton.setObjName("secondName");
+        System.out.println(firstSingleton.getObjName());
+        System.out.println(secondSingleton.getObjName());
+
+        // 反射获取实例测试
+        try {
+            Singleton[] enumConstants = Singleton.class.getEnumConstants();
+            for (Singleton enumConstant : enumConstants) {
+                System.out.println(enumConstant.getObjName());
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+}
+```
+
+
+
+### Chapter 4 生成器模式
+
+**定义：**封装一个复杂对象构造过程，并允许按步骤构造。
+
+**定义解释：** 我们可以将生成器模式理解为，假设我们有一个对象需要建立，这个对象是由多个组件（Component）组合而成，每个组件的建立都比较复杂，但运用组件来建立所需的对象非常简单，所以我们就可以将构建复杂组件的步骤与运用组件构建对象分离，使用builder模式可以建立。
+
+
+
+生成器模式结构中包括四种角色：
+
+（1）**产品(Product)**：具体生产器要构造的复杂对象；
+
+（2）**抽象生成器(Bulider)**：抽象生成器是一个接口，该接口除了为创建一个Product对象的各个组件定义了若干个方法之外，还要定义返回Product对象的方法（定义构造步骤）；
+
+（3）**具体生产器(ConcreteBuilder)**：实现Builder接口的类，具体生成器将实现Builder接口所定义的方法（生产各个组件）
+
+（4）**指挥者(Director)：**指挥者是一个类，该类需要含有Builder接口声明的变量。指挥者的职责是负责向用户提供具体生成器，即指挥者将请求具体生成器类来构造用户所需要的Product对象，如果所请求的具体生成器成功地构造出Product对象，指挥者就可以让该具体生产器返回所构造的Product对象。（按照步骤组装部件，并返回Product）
 
 by lqgdwind_bit
