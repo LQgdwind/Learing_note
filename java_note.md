@@ -4837,7 +4837,7 @@ public class Client {
 
 
 
-### Chapter 3 单例模式
+### 3 单例模式
 
 确保一个类只有一个实例，并提供该实例的全局访问点。
 
@@ -5001,7 +5001,7 @@ public enum Singleton {
 
 
 
-### Chapter 4 生成器模式
+### 4 生成器模式
 
 **定义：**封装一个复杂对象构造过程，并允许按步骤构造。
 
@@ -5018,5 +5018,101 @@ public enum Singleton {
 （3）**具体生产器(ConcreteBuilder)**：实现Builder接口的类，具体生成器将实现Builder接口所定义的方法（生产各个组件）
 
 （4）**指挥者(Director)：**指挥者是一个类，该类需要含有Builder接口声明的变量。指挥者的职责是负责向用户提供具体生成器，即指挥者将请求具体生成器类来构造用户所需要的Product对象，如果所请求的具体生成器成功地构造出Product对象，指挥者就可以让该具体生产器返回所构造的Product对象。（按照步骤组装部件，并返回Product）
+
+![image-20221101185128451](C:\Users\Administrator\Desktop\github repo\Learing_note\image\Design_Pattern\image-20221101185128451.png)
+
+例子：
+
+![image-20221101185207354](C:\Users\Administrator\Desktop\github repo\Learing_note\image\Design_Pattern\image-20221101185207354.png)
+
+```java
+public abstract class ComputerBuilder {
+   
+    protected Computer computer;
+   
+    public Computer getComputer() {
+        return computer;
+    }
+   
+    public void buildComputer() {
+        computer = new Computer();
+        System.out.println("生成了一台电脑！！！");
+    }
+    public abstract void buildMaster();
+    public abstract void buildScreen();
+    public abstract void buildKeyboard();
+    public abstract void buildMouse();
+    public abstract void buildAudio();
+}
+public class HPComputerBuilder extends ComputerBuilder {
+    @Override
+    public void buildMaster() {
+        // TODO Auto-generated method stub
+        computer.setMaster("i7,16g,512SSD,1060");
+        System.out.println("(i7,16g,512SSD,1060)的惠普主机");
+    }
+    @Override
+    public void buildScreen() {
+        // TODO Auto-generated method stub
+        computer.setScreen("1080p");
+        System.out.println("(1080p)的惠普显示屏");
+    }
+    @Override
+    public void buildKeyboard() {
+        // TODO Auto-generated method stub
+        computer.setKeyboard("cherry 青轴机械键盘");
+        System.out.println("(cherry 青轴机械键盘)的键盘");
+    }
+    @Override
+    public void buildMouse() {
+        // TODO Auto-generated method stub
+        computer.setMouse("MI 鼠标");
+        System.out.println("(MI 鼠标)的鼠标");
+    }
+    @Override
+    public void buildAudio() {
+        // TODO Auto-generated method stub
+        computer.setAudio("飞利浦 音响");
+        System.out.println("(飞利浦 音响)的音响");
+    }
+}
+public class Director {
+   
+    private ComputerBuilder computerBuilder;
+    public void setComputerBuilder(ComputerBuilder computerBuilder) {
+        this.computerBuilder = computerBuilder;
+    }
+   
+    public Computer getComputer() {
+        return computerBuilder.getComputer();
+    }
+   
+    public void constructComputer() {
+        computerBuilder.buildComputer();
+        computerBuilder.buildMaster();
+        computerBuilder.buildScreen();
+        computerBuilder.buildKeyboard();
+        computerBuilder.buildMouse();
+        computerBuilder.buildAudio();
+    }
+}
+```
+
+生成器模式的优缺点
+优点
+将一个对象分解为各个组件
+
+将对象组件的构造封装起来
+
+可以控制整个对象的生成过程
+
+缺点
+
+对不同类型的对象需要实现不同的具体构造器的类，这可能会大大增加类的数量
+
+3.3 生成器模式与工厂模式的不同
+生成器模式构建对象的时候，对象通常构建的过程中需要多个步骤，就像我们例子中的先有主机，再有显示屏，再有鼠标等等，生成器模式的作用就是将这些复杂的构建过程封装起来。工厂模式构建对象的时候通常就只有一个步骤，调用一个工厂方法就可以生成一个对象。
+
+
 
 by lqgdwind_bit
