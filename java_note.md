@@ -4660,7 +4660,7 @@ class InnerInherit extends WithInner.Inner
 
 
 
-**设计模式的三个分类**
+### 设计模式三个分类
 
 **创建型模式**：对象实例化的模式，创建型模式用于解耦对象的实例化过程。
 
@@ -4677,6 +4677,70 @@ class InnerInherit extends WithInner.Inner
 **各个模式之间的关系**：
 
 ![](C:\Users\Administrator\Desktop\github repo\Learing_note\image\Design_Pattern\98a09316240cb0dff94f39874a392657.jpg)
+
+### 设计模式六大原则
+
+**1、开闭原则（Open Close Principle）**
+
+开闭原则就是说对扩展开放，对修改关闭。在程序需要进行拓展的时候，不能去修改原有的代码，实现一个热插拔的效果。所以一句话概括就是：为了使程序的扩展性好，易于维护和升级。想要达到这样的效果，我们需要使用接口和抽象类。
+
+
+
+详细介绍：https://blog.csdn.net/lovelion/article/details/7537584
+
+ 
+
+**2、里氏代换原则（Liskov Substitution Principle）**
+
+里氏代换原则(Liskov Substitution Principle LSP)面向对象设计的基本原则之一。 里氏代换原则中说，任何基类可以出现的地方，子类一定可以出现。 LSP是继承复用的基石，只有当衍生类可以替换掉基类，软件单位的功能不受到影响时，基类才能真正被复用，而衍生类也能够在基类的基础上增加新的行为。里氏代换原则是对“开-闭”原则的补充。实现“开-闭”原则的关键步骤就是抽象化。而基类与子类的继承关系就是抽象化的具体实现，所以里氏代换原则是对实现抽象化的具体步骤的规范。
+
+
+
+详细介绍：https://blog.csdn.net/lovelion/article/details/7540445
+
+
+
+**3、依赖倒置原则（Dependence Inversion Principle）**
+
+这个是开闭原则的基础，具体内容：真对接口编程，依赖于抽象而不依赖于具体。
+
+
+
+详解介绍：https://blog.csdn.net/lovelion/article/details/7562783
+
+
+
+**4、接口隔离原则（Interface Segregation Principle）**
+
+这个原则的意思是：使用多个隔离的接口，比使用单个接口要好。还是一个降低类之间的耦合度的意思，从这儿我们看出，其实设计模式就是一个软件的设计思想，从大型软件架构出发，为了升级和维护方便。所以上文中多次出现：降低依赖，降低耦合。
+
+
+
+详细介绍：https://blog.csdn.net/lovelion/article/details/7562842
+
+
+
+**5、迪米特法则（最少知道原则）（Demeter Principle）**
+
+为什么叫最少知道原则，就是说：一个实体应当尽量少的与其他实体之间发生相互作用，使得系统功能模块相对独立。
+
+
+
+详细介绍：https://blog.csdn.net/lovelion/article/details/7563445
+
+
+
+**6、单一职责原则（Single-Responsibility-Principle）**
+
+核心：一个类只负责一个功能领域中相应的职责，或者可以定义为：就一个类而言，应该只有一个引起它变化的原因。 
+
+思想：如果一个类承担的职责过多，就等于把这些职责耦合在一起，一个职责的变化可能会削弱或者抑制这个类完成其他职责的能力。这种耦合会导致脆弱的设计，当变化发生时，设计会遭受到意想不到的破坏。
+
+
+
+详细介绍：https://blog.csdn.net/lovelion/article/details/7536542
+
+
 
 ### 1. 工厂方法模式
 
@@ -5001,7 +5065,296 @@ public enum Singleton {
 
 
 
-### 4 生成器模式
+### 4 适配器模式
+
+**定义**： 适配器模式将某个类的接口转换成客户端期望的另一个接口表示，目的是消除由于接口不匹配所造成的类的兼容性问题。
+
+在适配器模式中，我们通过增加一个新的适配器类来解决接口不兼容的问题，使得原本没有任何关系的类可以协同工作。
+
+
+
+**类别**：主要分为三类：
+
+1. 类适配器模式
+2. 对象适配器模式
+3. 缺省适配器模式（接口适配器模式）
+
+
+
+**类适配器模式**
+
+通过多重继承目标接口和被适配者类方式来实现适配。
+
+![image-20221112161150705](C:\Users\Administrator\Desktop\github repo\Learing_note\image\Design_Pattern\image-20221112161150705.png)
+
+
+
+具体例子：
+
+将USB接口转换为VGA接口
+
+![image-20221112161428023](C:\Users\Administrator\Desktop\github repo\Learing_note\image\Design_Pattern\image-20221112161428023.png)
+
+```java
+
+public class USBImpl implements USB{
+       @Override
+       public void showPPT() {
+              // TODO Auto-generated method stub
+              System.out.println("PPT内容演示");
+       }
+}
+//AdatperUSB2VGA 首先继承USBImpl获取USB的功能，其次，实现VGA接口，表示该类的类型为VGA。
+public class AdapterUSB2VGA extends USBImpl implements VGA {
+       @Override
+       public void projection() {
+              super.showPPT();
+       }
+}
+//Projector将USB映射为VGA，只有VGA接口才可以连接上投影仪进行投影
+public class Projector<T> {
+       public void projection(T t) {
+              if (t instanceof VGA) {
+                     System.out.println("开始投影");
+                     VGA v = new VGAImpl();
+                     v = (VGA) t;
+                     v.projection();
+              } else {
+                     System.out.println("接口不匹配，无法投影");
+              }
+       }
+}
+//测试代码
+       @Test
+       public void test2(){
+              //通过适配器创建一个VGA对象，这个适配器实际是使用的是USB的showPPT（）方法
+              VGA a=new AdapterUSB2VGA();
+              //进行投影
+              Projector p1=new Projector();
+              p1.projection(a);
+       } 
+
+```
+
+
+
+**对象适配器模式**
+
+对象适配器和类适配器使用了不同的方法实现适配，对象适配器使用组合，类适配器使用继承。
+
+![image-20221112161728111](C:\Users\Administrator\Desktop\github repo\Learing_note\image\Design_Pattern\image-20221112161728111.png)
+
+
+
+具体例子:
+
+![image-20221112161746020](C:\Users\Administrator\Desktop\github repo\Learing_note\image\Design_Pattern\image-20221112161746020.png)
+
+```java
+public class AdapterUSB2VGA implements VGA {
+       USB u = new USBImpl();
+       @Override
+       public void projection() {
+              u.showPPT();
+       }
+}
+//实现VGA接口，表示适配器类是VGA类型的，适配器方法中直接使用USB对象。
+```
+
+
+
+**缺省适配器模式**
+
+当不需要全部实现接口提供的方法时，可先设计一个抽象类实现接口，并为该接口中每个方法提供一个默认实现（空方法），那么该抽象类的子类可有选择地覆盖父类的某些方法来实现需求，它适用于一个接口不想使用其所有的方法的情况。
+
+具体例子：
+
+![image-20221112161923330](C:\Users\Administrator\Desktop\github repo\Learing_note\image\Design_Pattern\image-20221112161923330.png)
+
+```java
+public abstract class AdapterUSB2VGA implements VGA {
+       USB u = new USBImpl();
+       @Override
+       public void projection() {
+              u.showPPT();
+       }
+       @Override
+       public void b() {
+       };
+       @Override
+       public void c() {
+       };
+}
+//AdapterUSB2VGA实现，不用去实现b()和c()方法。
+public class AdapterUSB2VGAImpl extends AdapterUSB2VGA {
+       public void projection() {
+              super.projection();
+       }
+}
+```
+
+
+
+**总结：**
+
+类适配器模式：当希望将一个类转换成满足另一个新接口的类时，可以使用类的适配器模式，创建一个新类，继承原有的类，实现新的接口即可。
+
+对象适配器模式：当希望将一个对象转换成满足另一个新接口的对象时，可以创建一个Wrapper类，持有原类的一个实例，在Wrapper类的方法中，调用实例的方法就行。
+
+缺省适配器模式：当不希望实现一个接口中所有的方法时，可以创建一个抽象类Wrapper，实现所有方法，我们写别的类的时候，继承抽象类即可。
+
+
+
+**使用选择：**
+
+根据合成复用原则，组合大于继承。因此，类的适配器模式应该少用。
+
+
+
+### 5 装饰者模式
+
+**定义：**动态的将新功能附加到对象上。在对象功能扩展方面，它比继承更有弹性。
+
+**被装饰对象和修饰者继承自同一个超类**
+
+
+
+![image-20221112164811029](C:\Users\Administrator\Desktop\github repo\Learing_note\image\Design_Pattern\image-20221112164811029.png)
+
+**抽象组件（Component）：** 可以是一个接口或者抽象类，其充当被装饰类的原始对象，规定了被装饰对象的行为
+
+**具体组件（ConcreteComponent）： **实现/继承Component的一个具体对象，也即被装饰对象
+
+**抽象装饰器（Decorator）：** 通用的装饰ConcreteComponent的装饰器，其内部必然有一个属性指向Component抽象组件；其实现一般是一个抽象类，主要是为了让其子类按照其构造形式传入一个Component抽象组件，这是强制的通用行为（当然，如果系统中逻辑单一，并不需要实现许多装饰器，那么我们可以直接省略该类，而直接实现一个具体装饰器（ComcreteDecorator）即可）
+
+**具体装饰器（ConcreteDecorator）：** Decorator的具体实现类，理论上，每个ConcreteDecorator都扩展了Component对象的一种功能
+
+
+
+```java
+//创建一个抽象组件Component来规定被装饰对象的行为
+public abstract class Component 
+{
+    public abstract void execute();
+}
+public class ConcreteComponent extends Component 
+{
+    @Override
+    public void execute() {
+        System.out.println("具体组件处理业务逻辑");
+    }
+
+}
+//创建具体组件ConcreteComponent
+public abstract class Decorator extends Component 
+{
+    public Component component;
+
+    public Decorator(Component component) {
+        this.component = component;
+    }
+
+    public void execute() {
+        component.execute();
+    }
+}
+//创建一个抽象装饰器Decorator
+public class ConcreteDecorator extends Decorator 
+{
+    public ConcreteDecorator(Component component) {
+        super(component);
+    }
+    public void before(){
+        System.out.println("ConcreteDecorator前置操作....");
+    }
+    public void after(){
+        System.out.println("ConcreteDecorator后置操作....");
+    }
+    public void execute() {
+        before();
+        component.execute();
+        after();
+    }
+}
+
+
+//测试
+public class Test 
+{
+    public static void main(String[] args) 
+    {
+        //创建需要被装饰的组件
+        Component component = new ConcreteComponent();
+        //给对象透明的增加功能并调用
+        Decorator decorator = new ConcreteDecorator(component);
+        decorator.execute();
+    }
+}
+
+```
+
+
+
+具体实例：
+
+![image-20221112165839411](C:\Users\Administrator\Desktop\github repo\Learing_note\image\Design_Pattern\image-20221112165839411.png)
+
+注意：上图中Decorator对Drink既是继承关系也是组合关系
+
+
+
+
+
+**总结：**
+
+一般来说，我认为的装饰器模式的实现方法如下：
+
+1. 装饰器和被装饰者继承同一个父类
+2. 装饰器要将父类组合起来，作为其数据成员
+3. 装饰器将父类成员在构造方法中进行初始化(从而实现可以把被装饰者作为参数传进来然后操作被装饰者)
+
+
+
+**装饰器模式优缺点分析：**
+
+**优点：**
+装饰器是继承的有力补充，比继承灵活，不改变原有对象的情况下动态地给一个对象扩展功能，即插即用
+通过使用不同装饰类以及这些装饰类的排列组合，可以实现不同效果
+装饰器完全遵守开闭原则
+
+**缺点：**
+从代码层面来看，使用装饰器模式会出现更多的代码，更多的类，增加程序复杂性
+动态装饰时，多层装饰时会更复杂
+
+
+
+### 6 代理模式
+
+**定义：**代理模式给某一个对象提供一个代理对象，并由代理对象控制对原对象的引用。通俗的来讲代理模式就是我们生活中常见的中介。
+
+
+
+### 7 策略模式
+
+
+
+### 8 观察者模式
+
+
+
+### 9 访问者模式
+
+
+
+### 10 MVC
+
+
+
+### 11 Reactor
+
+
+
+### 12 生成器模式(考试不要求)
 
 **定义：**封装一个复杂对象构造过程，并允许按步骤构造。
 
