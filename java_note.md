@@ -5332,25 +5332,342 @@ public class Test
 
 **定义：**代理模式给某一个对象提供一个代理对象，并由代理对象控制对原对象的引用。通俗的来讲代理模式就是我们生活中常见的中介。
 
+![image-20221113084614439](C:\Users\Administrator\Desktop\github repo\Learing_note\image\Design_Pattern\image-20221113084614439.png)
+
+![image-20221113084445319](C:\Users\Administrator\Desktop\github repo\Learing_note\image\Design_Pattern\image-20221113084445319.png)
+
+**为什么要使用代理模式:**
+
+**中介隔离作用：**在某些情况下，一个客户类不想或者不能直接引用一个委托对象，而代理类对象可以在客户类和委托对象之间起到中介的作用，其特征是代理类和委托类实现相同的接口。
+
+**开闭原则，增加功能：**代理类除了是客户类和委托类的中介之外，我们还可以通过给代理类增加额外的功能来扩展委托类的功能，这样做我们只需要修改代理类而不需要再修改委托类，符合代码设计的开闭原则。代理类主要负责为委托类预处理消息、过滤消息、把消息转发给委托类，以及事后对返回结果的处理等。代理类本身并不真正实现服务，而是同过调用委托类的相关方法，来提供特定的服务。真正的业务功能还是由委托类来实现，但是可以在业务功能执行的前后加入一些公共的服务。例如我们想给项目加入缓存、日志这些功能，我们就可以使用代理类来完成，而没必要打开已经封装好的委托类。
+
+
+
+具体例子1：
+
+![image-20221113085804904](C:\Users\Administrator\Desktop\github repo\Learing_note\image\Design_Pattern\image-20221113085804904.png)
+
+
+
+具体例子2：
+
+![image-20221113085851509](C:\Users\Administrator\Desktop\github repo\Learing_note\image\Design_Pattern\image-20221113085851509.png)
+
+```java
+public interface BuyHouse 
+{
+    void buyHosue();
+}
+
+public class BuyHouseImpl implements BuyHouse 
+{
+       @Override
+       public void buyHosue() {
+              System.out.println("我要买房");
+       }
+}
+
+public class BuyHouseProxy implements BuyHouse {
+       private BuyHouse buyHouse;
+       public BuyHouseProxy(final BuyHouse buyHouse) {
+              this.buyHouse = buyHouse;
+       }
+       @Override
+       public void buyHosue() {
+              System.out.println("买房前准备");
+              buyHouse.buyHosue();
+              System.out.println("买房后装修");
+       }
+}
+```
+
+
+
+**总结:**
+
+优点：可以做到在符合开闭原则的情况下对目标对象进行功能扩展。
+
+缺点： **代理对象与目标对象要实现相同的接口，我们得为每一个服务都得创建代理类，工作量太大**，不易管理。同时接口一旦发生改变，代理类也得相应修改。 
+
+
+
+**我理解的代理模式：**
+
+1.代理类与委托类同时实现了相同的接口
+
+2.代理类会组合接口作为其数据成员来引用委托类对象
+
+3.我们可以通过对代理类为委托类增加许多功能，比如数据预处理等，而不需要改变委托类的代码。
+
 
 
 ### 7 策略模式
+
+**定义：** 策略模式定义了一系列算法，并将每个算法封装起来，使他们可以相互替换，且算法的变化不会影响到使用算法的客户。
+
+**意图：**定义一系列的算法,把它们一个个封装起来, 并且使它们可相互替换。
+
+**主要解决：**在有多种算法相似的情况下，使用 if...else 所带来的复杂和难以维护。
+
+**何时使用：**一个系统有许多许多类，而区分它们的只是他们直接的行为。
+
+**如何解决：**将这些算法封装成一个一个的类，任意地替换。
+
+**关键代码：**实现同一个接口。
+
+**类图：**
+
+![image-20221113095502285](C:\Users\Administrator\Desktop\github repo\Learing_note\image\Design_Pattern\image-20221113095502285.png)
+
+![image-20221113092707082](C:\Users\Administrator\Desktop\github repo\Learing_note\image\Design_Pattern\image-20221113092707082.png)
+
+
+
+具体例子：
+
+![image-20221113095430464](C:\Users\Administrator\Desktop\github repo\Learing_note\image\Design_Pattern\image-20221113095430464.png)
+
+加减法例子:
+
+![image-20221113095609746](C:\Users\Administrator\Desktop\github repo\Learing_note\image\Design_Pattern\image-20221113095609746.png)
+
+```java
+public interface Strategy 
+{
+	public int calc(int num1,int num2);
+}
+
+public class AddStrategy implements Strategy 
+{
+	@Override
+	public int calc(int num1, int num2) {
+		// TODO Auto-generated method stub
+		return num1 + num2;
+	}
+}
+
+public class SubstractStrategy implements Strategy 
+{
+	@Override
+	public int calc(int num1, int num2) {
+		// TODO Auto-generated method stub
+		return num1 - num2;
+	}
+}
+
+public class Environment 
+{
+	private Strategy strategy;
+	public Environment(Strategy strategy) 
+  {
+		this.strategy = strategy;
+	}
+	public int calculate(int a, int b) 
+  {
+		return strategy.calc(a, b);
+	}
+}
+
+```
+
+
+
+**策略模式优缺点：**
+
+**优点：** 1、算法可以自由切换。 2、避免使用多重条件判断。 3、扩展性良好。
+
+**缺点：** 1、策略类会增多。 2、所有策略类都需要对外暴露。
+
+
+
+**我理解的策略模式：**
+
+1.在需要使用策略的类中组合一个策略接口
+
+2.为策略接口定义抽象方法
+
+3.具体策略类实现策略接口
+
+4.使用多态引用具体策略对象
 
 
 
 ### 8 观察者模式
 
+**定义：** 定义对象间的一种一对多的依赖关系，当一个对象的状态发生改变时，所有依赖于它的对象都得到通知并被自动更新。
+
+**主要解决：**一个对象状态改变给其他对象通知的问题，而且要考虑到易用和低耦合，保证高度的协作。
+
+**何时使用：**一个对象（目标对象）的状态发生改变，所有的依赖对象（观察者对象）都将得到通知，进行广播通知。
+
+**如何解决：**使用面向对象技术，可以将这种依赖关系弱化。
+
+**关键代码：**在抽象类里有一个 ArrayList 存放观察者们。
+
+![image-20221113100732850](C:\Users\Administrator\Desktop\github repo\Learing_note\image\Design_Pattern\image-20221113100732850.png)
+
+![image-20221113101803783](C:\Users\Administrator\Desktop\github repo\Learing_note\image\Design_Pattern\image-20221113101803783.png)
+
+
+
+具体实例：
+
+气象站设计
+
+![image-20221113102207984](C:\Users\Administrator\Desktop\github repo\Learing_note\image\Design_Pattern\image-20221113102207984.png)
+
+![image-20221113101748146](C:\Users\Administrator\Desktop\github repo\Learing_note\image\Design_Pattern\image-20221113101748146.png)
+
+**观察者模式优缺点：**
+
+**优点：** 1、观察者和被观察者是抽象耦合的。 2、建立一套触发机制。
+
+**缺点： **1、如果一个被观察者对象有很多的直接和间接的观察者的话，将所有的观察者都通知到会花费很多时间。 2、如果在观察者和观察目标之间有循环依赖的话，观察目标会触发它们之间进行循环调用，可能导致系统崩溃。 3、观察者模式没有相应的机制让观察者知道所观察的目标对象是怎么发生变化的，而仅仅只是知道观察目标发生了变化。
+
+
+
+
+
+**我理解的观察者模式:**
+
+1.subject接口需要维护一个动态的ArrayList用来存放每一个观察者，同时需要定义三个抽象方法registerObserver、removeObserver和notifyObserver。
+
+2.Observer接口需要定义一个抽象方法update()
+
+3.具体subject需要实现三个抽象方法，其中notifyObserver需要遍历ArrayList，并执行每一个容器内的Observer对象的update方法。
+
+4.所有具体Observer都需要引用一个具体subject，用于登记，并且需要实现update()方法，用于观察者被通知后的执行何种操作。
+
 
 
 ### 9 访问者模式
 
+**定义：**将作用于某种数据结构中的各元素的操作分离出来封装成独立的类，使其在不改变数据结构的前提下可以添加作用于这些元素的新的操作，为数据结构中的每个元素提供多种访问方式。它将对数据的操作与数据结构进行分离。
+
+**访问者模式角色：**
+
+抽象访问者（Visitor）角色：定义一个访问具体元素的接口，为每个具体元素类对应一个访问操作 visit() ，该操作中的参数类型标识了被访问的具体元素。
+
+具体访问者（ConcreteVisitor）角色：实现抽象访问者角色中声明的各个访问操作，确定访问者访问一个元素时该做什么。
+
+抽象元素（Element）角色：声明一个包含接受操作 accept() 的接口，被接受的访问者对象作为 accept() 方法的参数。
+
+具体元素（ConcreteElement）角色：实现抽象元素角色提供的 accept() 操作，其方法体通常都是 visitor.visit(this) ，另外具体元素中可能还包含本身业务逻辑的相关操作。
+
+对象结构（Object Structure）角色：是一个包含元素角色的容器，提供让访问者对象遍历容器中的所有元素的方法，通常由 List、Set、Map 等聚合类实现。
 
 
-### 10 MVC
+
+![image-20221113103447769](C:\Users\Administrator\Desktop\github repo\Learing_note\image\Design_Pattern\image-20221113103447769.png)
+
+```java
+public interface Visitor 
+{
+	abstract public void Visit(Element element);
+}
+public class CompensationVisitor implements Visitor 
+{
+	@Override
+	public void Visit(Element element) {
+		// TODO Auto-generated method stub
+		Employee employee = ((Employee) element);
+ 
+		System.out.println(
+				employee.getName() + "'s Compensation is " + (employee.getDegree() * employee.getVacationDays() * 10));
+	}
+ 
+}
+public interface Element 
+{
+	abstract public void Accept(Visitor visitor);
+ 
+}
+public class CompensationVisitor implements Visitor 
+{
+	@Override
+	public void Visit(Element element) {
+		// TODO Auto-generated method stub
+		Employee employee = ((Employee) element);
+ 
+		System.out.println(
+				employee.getName() + "'s Compensation is " + (employee.getDegree() * employee.getVacationDays() * 10));
+	}
+}
+public class ObjectStructure 
+{
+	private HashMap<String, Employee> employees;
+ 
+	public ObjectStructure() {
+		employees = new HashMap();
+	}
+ 
+	public void Attach(Employee employee) {
+		employees.put(employee.getName(), employee);
+	}
+ 
+	public void Detach(Employee employee) {
+		employees.remove(employee);
+	}
+ 
+	public Employee getEmployee(String name) {
+		return employees.get(name);
+	}
+ 
+	public void Accept(Visitor visitor) {
+		for (Employee e : employees.values()) {
+			e.Accept(visitor);
+		}
+	}
+ 
+}
+```
 
 
 
-### 11 Reactor
+**访问者模式优缺点：**
+
+访问者（Visitor）模式是一种对象行为型模式，其主要优点如下。
+
+1.扩展性好。能够在不修改对象结构中的元素的情况下，为对象结构中的元素添加新的功能。
+
+2.复用性好。可以通过访问者来定义整个对象结构通用的功能，从而提高系统的复用程度。
+
+3.灵活性好。访问者模式将数据结构与作用于结构上的操作解耦，使得操作集合可相对自由地演化而不影响系统的数据结构。
+
+4.符合单一职责原则。访问者模式把相关的行为封装在一起，构成一个访问者，使每一个访问者的功能都比较单一。
+
+访问者（Visitor）模式的主要缺点如下。
+
+1.增加新的元素类很困难。在访问者模式中，每增加一个新的元素类，都要在每一个具体访问者类中增加相应的具体操作，这违背了“开闭原则”。
+
+2.破坏封装。访问者模式中具体元素对访问者公布细节，这破坏了对象的封装性。
+
+3.违反了依赖倒置原则。访问者模式依赖了具体类，而没有依赖抽象类。
+
+
+
+**我理解的访问者模式：**
+
+1.首先定义抽象visitor类。抽象vistor中需要定义多个抽象方法visit (concreteElement )，从而实现对不同元素的不同访问。
+
+2.再定义抽象Element类。抽象Element中需要定义多个抽象方法accept(concreteVistor),通过多态机制来限制不同访问者的访问权限。
+
+3.再定义concreteElement类。需要继承抽象Element类实现accept方法。一般来说，accept方法体都是vistor.visit(this)，把this引用传给vistor。同时，我们需要定义一系列操作供vistor使用。
+
+4.再定义concreteVistor类，我们需要具体实现方法visit。一般在visit方法中，我们会对传进来的Element引用进行一系列操作。这些操作都是Element自己定义的。
+
+5.最后，我们会维护一个对象结构，独显结构中一般会放一个元素列表用于存放所有元素。
+
+6.通过调用concreteElement的accept方法，将visitor引用传进去就能实现访问。
+
+
+
+### 10 MVC模式
+
+
+
+### 11 Reactor模式
 
 
 
@@ -5465,6 +5782,18 @@ public class Director {
 
 3.3 生成器模式与工厂模式的不同
 生成器模式构建对象的时候，对象通常构建的过程中需要多个步骤，就像我们例子中的先有主机，再有显示屏，再有鼠标等等，生成器模式的作用就是将这些复杂的构建过程封装起来。工厂模式构建对象的时候通常就只有一个步骤，调用一个工厂方法就可以生成一个对象。
+
+
+
+### 13 状态模式
+
+
+
+### 14 桥接模式
+
+
+
+### 15 解释器模式
 
 
 
