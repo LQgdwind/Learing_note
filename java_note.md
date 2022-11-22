@@ -4676,7 +4676,7 @@ class InnerInherit extends WithInner.Inner
 
 **各个模式之间的关系**：
 
-![](C:\Users\Administrator\Desktop\github repo\Learing_note\image\Design_Pattern\98a09316240cb0dff94f39874a392657.jpg)
+![](.\image\Design_Pattern\98a09316240cb0dff94f39874a392657.jpg)
 
 ### 设计模式六大原则
 
@@ -4746,7 +4746,7 @@ class InnerInherit extends WithInner.Inner
 
 定义了一个创建对象的接口，但由子类决定要实例化哪个类。工厂方法把实例化操作推迟到子类。
 
-![image-20221031092451805](C:\Users\Administrator\Desktop\github repo\Learing_note\image\Design_Pattern\image-20221031092451805.png)
+![image-20221031092451805](.\image\Design_Pattern\image-20221031092451805.png)
 
 
 
@@ -4757,7 +4757,7 @@ class InnerInherit extends WithInner.Inner
 
 **具体应用:**
 
-![image-20221031092934462](C:\Users\Administrator\Desktop\github repo\Learing_note\image\Design_Pattern\image-20221031092934462.png)
+![image-20221031092934462](.\image\Design_Pattern\image-20221031092934462.png)
 
 
 
@@ -4826,7 +4826,7 @@ public class FactoryTest {
 ### 2.抽象工厂模式
 
 抽象工厂模式（Abstract Factory Pattern）是一种软件开发设计模式。抽象工厂模式提供了一种方式，可以将一组具有同一主题的单独的工厂封装起来。如果比较抽象工厂模式和工厂模式，我们不难发现前者只是在工厂模式之上增加了一层抽象的概念。抽象工厂是一个父类工厂，可以创建其它工厂类。所以我们也叫它 “工厂的工厂”。
-![image-20221031093344631](C:\Users\Administrator\Desktop\github repo\Learing_note\image\Design_Pattern\image-20221031093344631.png)
+![image-20221031093344631](.\image\Design_Pattern\image-20221031093344631.png)
 
 
 
@@ -4909,7 +4909,7 @@ public class Client {
 
 私有构造函数保证了不能通过构造函数来创建对象实例，只能通过公有静态函数返回唯一的私有静态变量。
 
-![image-20221031100119060](C:\Users\Administrator\Desktop\github repo\Learing_note\image\Design_Pattern\image-20221031100119060.png)
+![image-20221031100119060](.\image\Design_Pattern\image-20221031100119060.png)
 
 
 
@@ -5085,7 +5085,7 @@ public enum Singleton {
 
 通过多重继承目标接口和被适配者类方式来实现适配。
 
-![image-20221112161150705](C:\Users\Administrator\Desktop\github repo\Learing_note\image\Design_Pattern\image-20221112161150705.png)
+![image-20221112161150705](.\image\Design_Pattern\image-20221112161150705.png)
 
 
 
@@ -5093,7 +5093,7 @@ public enum Singleton {
 
 将USB接口转换为VGA接口
 
-![image-20221112161428023](C:\Users\Administrator\Desktop\github repo\Learing_note\image\Design_Pattern\image-20221112161428023.png)
+![image-20221112161428023](.\image\Design_Pattern\image-20221112161428023.png)
 
 ```java
 
@@ -5142,13 +5142,13 @@ public class Projector<T> {
 
 对象适配器和类适配器使用了不同的方法实现适配，对象适配器使用组合，类适配器使用继承。
 
-![image-20221112161728111](C:\Users\Administrator\Desktop\github repo\Learing_note\image\Design_Pattern\image-20221112161728111.png)
+![image-20221112161728111](.\image\Design_Pattern\image-20221112161728111.png)
 
 
 
 具体例子:
 
-![image-20221112161746020](C:\Users\Administrator\Desktop\github repo\Learing_note\image\Design_Pattern\image-20221112161746020.png)
+![image-20221112161746020](.\image\Design_Pattern\image-20221112161746020.png)
 
 ```java
 public class AdapterUSB2VGA implements VGA {
@@ -5169,7 +5169,7 @@ public class AdapterUSB2VGA implements VGA {
 
 具体例子：
 
-![image-20221112161923330](C:\Users\Administrator\Desktop\github repo\Learing_note\image\Design_Pattern\image-20221112161923330.png)
+![image-20221112161923330](.\image\Design_Pattern\image-20221112161923330.png)
 
 ```java
 public abstract class AdapterUSB2VGA implements VGA {
@@ -5219,7 +5219,7 @@ public class AdapterUSB2VGAImpl extends AdapterUSB2VGA {
 
 
 
-![image-20221112164811029](C:\Users\Administrator\Desktop\github repo\Learing_note\image\Design_Pattern\image-20221112164811029.png)
+![image-20221112164811029](.\image\Design_Pattern\image-20221112164811029.png)
 
 **抽象组件（Component）：** 可以是一个接口或者抽象类，其充当被装饰类的原始对象，规定了被装饰对象的行为
 
@@ -5297,7 +5297,7 @@ public class Test
 
 具体实例：
 
-![image-20221112165839411](C:\Users\Administrator\Desktop\github repo\Learing_note\image\Design_Pattern\image-20221112165839411.png)
+![image-20221112165839411](.\image\Design_Pattern\image-20221112165839411.png)
 
 注意：上图中Decorator对Drink既是继承关系也是组合关系
 
@@ -5332,9 +5332,9 @@ public class Test
 
 **定义：**代理模式给某一个对象提供一个代理对象，并由代理对象控制对原对象的引用。通俗的来讲代理模式就是我们生活中常见的中介。
 
-![image-20221113084614439](C:\Users\Administrator\Desktop\github repo\Learing_note\image\Design_Pattern\image-20221113084614439.png)
+![image-20221113084614439](.\image\Design_Pattern\image-20221113084614439.png)
 
-![image-20221113084445319](C:\Users\Administrator\Desktop\github repo\Learing_note\image\Design_Pattern\image-20221113084445319.png)
+![image-20221113084445319](.\image\Design_Pattern\image-20221113084445319.png)
 
 **为什么要使用代理模式:**
 
@@ -5346,13 +5346,13 @@ public class Test
 
 具体例子1：
 
-![image-20221113085804904](C:\Users\Administrator\Desktop\github repo\Learing_note\image\Design_Pattern\image-20221113085804904.png)
+![image-20221113085804904](.\image\Design_Pattern\image-20221113085804904.png)
 
 
 
 具体例子2：
 
-![image-20221113085851509](C:\Users\Administrator\Desktop\github repo\Learing_note\image\Design_Pattern\image-20221113085851509.png)
+![image-20221113085851509](.\image\Design_Pattern\image-20221113085851509.png)
 
 ```java
 public interface BuyHouse 
@@ -5418,19 +5418,19 @@ public class BuyHouseProxy implements BuyHouse {
 
 **类图：**
 
-![image-20221113095502285](C:\Users\Administrator\Desktop\github repo\Learing_note\image\Design_Pattern\image-20221113095502285.png)
+![image-20221113095502285](.\image\Design_Pattern\image-20221113095502285.png)
 
-![image-20221113092707082](C:\Users\Administrator\Desktop\github repo\Learing_note\image\Design_Pattern\image-20221113092707082.png)
+![image-20221113092707082](.\image\Design_Pattern\image-20221113092707082.png)
 
 
 
 具体例子：
 
-![image-20221113095430464](C:\Users\Administrator\Desktop\github repo\Learing_note\image\Design_Pattern\image-20221113095430464.png)
+![image-20221113095430464](.\image\Design_Pattern\image-20221113095430464.png)
 
 加减法例子:
 
-![image-20221113095609746](C:\Users\Administrator\Desktop\github repo\Learing_note\image\Design_Pattern\image-20221113095609746.png)
+![image-20221113095609746](.\image\Design_Pattern\image-20221113095609746.png)
 
 ```java
 public interface Strategy 
@@ -5505,9 +5505,9 @@ public class Environment
 
 **关键代码：**在抽象类里有一个 ArrayList 存放观察者们。
 
-![image-20221113100732850](C:\Users\Administrator\Desktop\github repo\Learing_note\image\Design_Pattern\image-20221113100732850.png)
+![image-20221113100732850](.\image\Design_Pattern\image-20221113100732850.png)
 
-![image-20221113101803783](C:\Users\Administrator\Desktop\github repo\Learing_note\image\Design_Pattern\image-20221113101803783.png)
+![image-20221113101803783](.\image\Design_Pattern\image-20221113101803783.png)
 
 
 
@@ -5515,9 +5515,9 @@ public class Environment
 
 气象站设计
 
-![image-20221113102207984](C:\Users\Administrator\Desktop\github repo\Learing_note\image\Design_Pattern\image-20221113102207984.png)
+![image-20221113102207984](.\image\Design_Pattern\image-20221113102207984.png)
 
-![image-20221113101748146](C:\Users\Administrator\Desktop\github repo\Learing_note\image\Design_Pattern\image-20221113101748146.png)
+![image-20221113101748146](.\image\Design_Pattern\image-20221113101748146.png)
 
 **观察者模式优缺点：**
 
@@ -5557,9 +5557,11 @@ public class Environment
 
 对象结构（Object Structure）角色：是一个包含元素角色的容器，提供让访问者对象遍历容器中的所有元素的方法，通常由 List、Set、Map 等聚合类实现。
 
+![image-20221113162023809](.\image\Design_Pattern\image-20221113162023809.png)
 
 
-![image-20221113103447769](C:\Users\Administrator\Desktop\github repo\Learing_note\image\Design_Pattern\image-20221113103447769.png)
+
+![image-20221113103447769](.\image\Design_Pattern\image-20221113103447769.png)
 
 ```java
 public interface Visitor 
@@ -5665,13 +5667,143 @@ public class ObjectStructure
 
 ### 10 MVC模式
 
+**定义：**MVC，即 Model 模型、View 视图，及 Controller 控制器。
+
+**View：**视图，为用户提供使用界面，与用户直接进行交互。
+
+**Model：**模型，承载数据，并对用户提交请求进行计算的模块。
+
+其分为两类：
+
+一类称为数据承载 Bean：实体类，专门用户承载业务数据的，如 Student、User 等 
+
+一类称为业务处理 Bean：指 Service 或 Dao 对象，专门用于处理用户提交请求的。
+
+**Controller：**控制器，用于将用户请求转发给相应的 Model 进行处理，并根据 Model 的计算结果向用户提供相应响应。
+
+![image-20221113164323874](.\image\Design_Pattern\image-20221113164323874.png)
+
+
+
+**MVC 架构程序的工作流程：**
+（1）用户通过 View 页面向服务端提出请求，可以是表单请求、超链接请求、AJAX 请求等
+（2）服务端 Controller 控制器接收到请求后对请求进行解析，找到相应的 Model 对用户请求进行处理
+（3）Model 处理后，将处理结果再交给 Controller
+（4）Controller 在接到处理结果后，根据处理结果找到要作为向客户端发回的响应 View 页面。页面经渲染（数据填充）后，再发送给客户端。
+
+
+
+**常见的MVC架构1:**
+
+JSP作为View
+
+Javabean作为model
+
+servlet作为controller
+
+![image-20221113165710389](.\image\Design_Pattern\image-20221113165710389.png)
+
+**常见的MVC架构2:**
+
+![image-20221113165825018](.\image\Design_Pattern\image-20221113165825018.png)
+
+**MVC模式优缺点**
+
+**优点**
+**1 低耦合**
+通过将视图层和业务层分离，允许更改视图层代码而不必重新编译模型和控制器代码，同样，一个应用的业务流程或者业务规则的改变，只需要改动MVC的模型层（及控制器）即可。因为模型与控制器和视图相分离，所以很容易改变应用程序的数据层和业务规则。
+
+模型层是自包含的，并且与控制器和视图层相分离，所以很容易改变应用程序的数据层和业务规则。如果想把数据库从 MySQL 移植到 Oracle，或者改变基于 RDBMS 的数据源到 LDAP，只需改变模型层即可。一旦正确的实现了模型层，不管数据来自数据库或是 LDAP服务器，视图层都将会正确的显示它们。由于运用 MVC 的应用程序的三个部件是相互独立，改变其中一个部件并不会影响其它两个，所以依据这种设计思想能构造出良好的松耦合的构件。
+
+**2 重用性高**
+随着技术的不断进步，当前需要使用越来越多的方式来访问应用程序了。MVC模式允许使用各种不同样式的视图来访问同一个服务端的代码，这得益于多个视图（如WEB（HTTP）浏览器或者无线浏览器（WAP））能共享一个模型。
+
+比如，用户可以通过电脑或通过手机来订购某样产品，虽然订购的方式不一样，但处理订购产品的方式（流程）是一样的。由于模型返回的数据没有进行格式化，所以同样的构件能被不同的界面（视图）使用。例如，很多数据可能用 HTML 来表示，但是也有可能用 WAP 来表示，而这些表示的变化所需要的是仅仅是改变视图层的实现方式，而控制层和模型层无需做任何改变。
+
+由于已经将数据和业务规则从表示层分开，所以可以最大化的进行代码重用了。另外，模型层也有状态管理和数据持久性处理的功能，所以，基于会话的购物车和电子商务过程，也能被Flash网站或者无线联网的应用程序所重用。
+
+**3 生命周期成本低**
+MVC模式使开发和维护用户接口的技术含量降低。
+
+**4 部署快**
+使用MVC模式进行软件开发，使得软件开发时间得到相当大的缩减，它使后台程序员集中精力于业务逻辑，界面程序员集中精力于表现形式上。
+
+**5 可维护性高**
+分离视图层和业务逻辑层使得WEB应用更易于维护和修改。
+
+**6 有利软件工程化管理**
+由于不同的组件（层）各司其职，每一层不同的应用会具有某些相同的特征，这样就有利于通过工程化、工具化的方式管理程序代码。控制器同时还提供了一个好处，就是可以使用控制器来联接不同的模型和视图，来实现用户的需求，这样控制器可以为构造应用程序提供强有力的手段。给定一些可重用的模型和视图，控制器可以根据用户的需求选择模型进行处理，然后选择视图将处理结果显示给用户。
+
+**缺点**
+**1 没有明确的定义**
+完全理解MVC模式并不是很容易。使用MVC模式需要精心的计划，由于它的内部原理比较复杂，所以需要花费一些时间去思考软件的架构。同时由于模型和视图要严格的分离，这样也给调试应用程序带来了一定的困难。每个构件在使用之前都需要经过彻底的测试。
+
+**2 不适合小、中型应用程序**
+花费大量时间将MVC模式应用到规模并不是很大的应用程序通常会得不偿失。
+
+**3 增加系统结构和实现的复杂性**
+对于简单的界面来说，非要严格遵循MVC模式，使模型、视图与控制器分离，会增加结构的复杂性，并可能产生过多的更新操作，降低运行效率。
+
+**4 视图对模型数据的低效率访问**
+依据模型操作接口的不同，视图可能需要多次调用才能获得足够的显示数据。对未变化数据的不必要的频繁访问，也将损害操作性能。
+
+说明：如果通过控制器访问模型层（而非视图层直接访问），则避免对未变化数据的不必要的频繁访问，从而解决此问题。
+
 
 
 ### 11 Reactor模式
 
+**定义：**Reactor模式允许事件驱动的系统复用和分发服务请求。这些请求来自于一个或者多个客户端。
+
+![image-20221113175954816](.\image\Design_Pattern\image-20221113175954816.png)
+
+**类图：**
+
+![image-20221113180020831](.\image\Design_Pattern\image-20221113180020831.png)
+
+**我理解的reactor模式：**
+
+分为两个过程：
+
+首先是初始化
+
+1.ConcreteEventHandler调用Reactor对象的register_handler方法以实现具体事件的注册。
+
+2.Reactor调用ConcreteEventHandler对象的get_handle方法来获取Handler对象的handle号，Handler对象返回handle号给Reactor并且加入handle_set
+
+3.当所有事件均注册之后，主程序调用handle_event()函数开始reactor的事件循环。reactor此时掌握了事件句柄以便随时激活，同时联合同步事件分发器等待事件的到来。例如，我们可以使用select等待TCP的接入。
+
+其次是事件处理流程
+
+1.主程序调用Reactor的handle_events方法发出事件处理请求
+
+2.Reactor调用线程池的select方法从handle_set中选择一个可以调用的handle
+
+3.通过handle号Reactor映射到对应的handler上并且调用handler的handle_event方法，concreteEventHandler随即开始事件处理、
 
 
-### 12 生成器模式(考试不要求)
+
+**时序图：**
+
+![image-20221113184123241](.\image\Design_Pattern\image-20221113184123241.png)
+
+该时序图的流程：
+
+1.服务端使用reactor注册ConcreteEventHandler，即告诉初始分配器，当某种特定类型事件发生时则回调该ConcreteEventHandler。
+
+2.初始分配器请求所有的ConcreteEventHandler返回其handle进行记录以便于辨识。
+
+3.当所有事件均注册之后，主程序调用handle_event()函数开始初始分配器的事件循环。初始分配器此时掌握了ConcreteEventHandler以便随时激活，同时联合同步事件分发器等待事件的到来。例如，我们可以使用select等待TCP的接入。
+
+4.当事件发生的时候，同步事件分发器通知Reactor。
+
+5.初始分配器触发ConcreteEventHandler的handle_event方法以处理事件。当事件发生时，初始分发器使用handle激活事件资源并分配合适的ConcreteEventHandler的handle_event方法，并使用方法内在的函数进行处理。
+
+### 12 解释器模式
+
+
+
+### 13 生成器模式(以下模式考试不要求)
 
 **定义：**封装一个复杂对象构造过程，并允许按步骤构造。
 
@@ -5689,11 +5821,11 @@ public class ObjectStructure
 
 （4）**指挥者(Director)：**指挥者是一个类，该类需要含有Builder接口声明的变量。指挥者的职责是负责向用户提供具体生成器，即指挥者将请求具体生成器类来构造用户所需要的Product对象，如果所请求的具体生成器成功地构造出Product对象，指挥者就可以让该具体生产器返回所构造的Product对象。（按照步骤组装部件，并返回Product）
 
-![image-20221101185128451](C:\Users\Administrator\Desktop\github repo\Learing_note\image\Design_Pattern\image-20221101185128451.png)
+![image-20221101185128451](.\image\Design_Pattern\image-20221101185128451.png)
 
 例子：
 
-![image-20221101185207354](C:\Users\Administrator\Desktop\github repo\Learing_note\image\Design_Pattern\image-20221101185207354.png)
+![image-20221101185207354](.\image\Design_Pattern\image-20221101185207354.png)
 
 ```java
 public abstract class ComputerBuilder {
@@ -5783,18 +5915,586 @@ public class Director {
 3.3 生成器模式与工厂模式的不同
 生成器模式构建对象的时候，对象通常构建的过程中需要多个步骤，就像我们例子中的先有主机，再有显示屏，再有鼠标等等，生成器模式的作用就是将这些复杂的构建过程封装起来。工厂模式构建对象的时候通常就只有一个步骤，调用一个工厂方法就可以生成一个对象。
 
-
-
-### 13 状态模式
-
-
-
-### 14 桥接模式
+### 14 命令模式
 
 
 
-### 15 解释器模式
+### 15 状态模式
 
 
 
-by lqgdwind_bit
+### 16 桥接模式
+
+
+
+### 
+
+
+
+
+
+## Java软件体系结构
+
+**定义：**
+
+Software architecture is the fundamental organization of a system, embodied in its components, their relationships to each other and the environment, and the principles governing its design and evolution.
+
+### 常见的五种结构:
+
+![image-20221120162943743](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20221120162943743.png)
+
+### 1. DataFlowSystems
+
+<img src=".\image\Design_Pattern\image-20221120012918463.png" alt="image-20221120012918463" style="zoom:50%;" />
+
+数据流系统是一个
+
+1.数据的可用性控制计算
+
+2.设计结构主要是进程之间数据的有序流动
+
+3.数据流的模式是显式
+
+在一个纯数据流系统中，流程之间没有其他的交互
+
+
+
+#### Pipes and Filters 管道过滤器风格
+
+![image-20221120013107813](.\image\Design_Pattern\image-20221120013107813.png)
+
+
+
+**组件和连接件**
+
+组件： 
+
+filters -->处理数据流，一个过滤器封装了一个处理步骤。
+
+连接件：
+
+pipes --> 连接一个源和一个目的过滤器。
+
+
+
+**定义**
+
+**过滤器**
+
+每个过滤器都有一组输入集和输出集。
+
+过滤器从管道中读入数据流，对输入流进行内部转换和增量计算（丰富，精炼，转换，融合，分解），然后产生输出数据流并写入管道中。
+
+每个过滤器必须是一个独立的实体：
+
+过滤器之间无需共享状态，即filter无需知道其输入管道和输出管道所连接的其他过滤器的存在，更不必关注相邻过滤器的实现细节。
+
+他仅仅需要对输入数据流进行特定的内部転换和增量计算，筛选出合适的数据。
+
+数据到来是便被处理，不是收集然后处理，即在输入被完全消费之前，输出便产生了。
+
+
+
+**管道:**
+
+管道是将数据从一个过滤器的输出端移动到另一个过滤器的输入端，是一个单向流。
+
+不同的管道中流动的数据流，可能具有不同的数据格式。
+
+
+
+**应用示例**
+
+编译器、Unix管道、图像处理，信号处理，声音与图像处理
+
+<img src=".\image\Design_Pattern\image-20221120013557773.png" alt="image-20221120013557773" style="zoom:50%;" />
+
+<img src=".\image\Design_Pattern\image-20221120013613789.png" alt="image-20221120013613789" style="zoom:50%;" />
+
+**优缺点:**
+
+![image-20221120013701574](.\image\Design_Pattern\image-20221120013701574.png)
+
+####  Batch Sequential Systems(批处理风格)
+
+<img src=".\image\Design_Pattern\image-20221120103436113.png" alt="image-20221120103436113" style="zoom:50%;" />
+
+例子:
+
+<img src=".\image\Design_Pattern\image-20221120103521445.png" alt="image-20221120103521445" style="zoom:50%;" />
+
+### 2. Call and return systems
+
+#### Main program and subroutine 主程序/子程序风格
+
+<img src=".\image\Design_Pattern\image-20221120165400175.png" alt="image-20221120165400175" style="zoom:50%;" />
+
+![image-20221120163629635](.\image\Design_Pattern\image-20221120163629635.png)
+
+**组件和连接件**
+
+**组件：**
+
+过程和明确可见的数据
+
+**连接件：**
+
+过程调用和显式的共享数据
+
+**控制结构：**
+
+单线程
+
+**特点**
+
+调用和定义层次结构，子系统通常通过模块化来定义。
+
+系统通常会被组织成一个主程序和一系列子程序的集合。主程序担当子程序的驱动器，为子程序提供一个人控制环路，使子程序以某种次序顺序执行。
+
+#### ADT & OO 面向对象风格
+
+![image-20221120165630952](.\image\Design_Pattern\image-20221120165630952.png)
+
+<img src=".\image\Design_Pattern\image-20221120165713951.png" alt="image-20221120165713951" style="zoom:50%;" />
+
+<img src=".\image\Design_Pattern\image-20221120165821410.png" alt="image-20221120165821410" style="zoom:50%;" />
+
+<img src="C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20221120165834470.png" alt="image-20221120165834470" style="zoom:50%;" />
+
+**组件和连接件**
+
+组件：对象（抽象数据类型的实例）
+
+连接件：过程调用
+
+
+
+**特点**
+在基于面向对象的模式中，操作和数据绑定在一起，隐藏实现和其他秘密。对象通过过程调用来实现交互。有两个重要方面：
+
+对象维护自身表示的完整性
+这种表示对其他对象是隐藏的
+
+
+
+**优点和缺点**
+
+优点：
+
+1. 面向对象易维护，易复用
+2. 对象反映现实世界，容易分解一个系统
+3. 对象对客户实现了隐藏细节，所有可以在不影响其客户的情况下改变对象的实现 。
+
+缺点：
+
+对象的管理比较复杂，当一个对象和其他对象交互，必须知道其他对象的标识。每当一个对象的标识改变的时候，必须修改那些显示调用它的对象。
+
+
+
+
+
+#### Hierarchical layers 分层风格
+
+<img src=".\image\Design_Pattern\image-20221120170429839.png" alt="image-20221120170429839"  />
+
+**组件和连接件**
+
+组件： 在某些层中实现虚拟机
+
+连接件： 协议， 规定了层次之间的交互方式
+
+拓扑结构： 限制相邻层之间的交互
+
+**特点**
+
+一个分成系统是按照层次结构组织的，每一层向它的上层提供服务，同时它又是下层的客户。
+上层必须知道下层的身份，不能调整层次之间的顺序。
+大的问题分解成若干渐进的小问题，逐步解决，隐藏了很多复杂度。
+内层只对其相邻的层和某些用于输出的函数是可见的，对其他外部的层是隐藏的。
+修改一层，最多影响两层， 通常只会影响上层。若层之间接口稳固，则不会造成其他影响
+层层相调，影响性能。
+
+**优点和缺点**
+
+优点：
+
+1.支持基于逐级抽象的系统设计，这允许设计者将一个复杂的问题分解成一系列递增的步骤。
+2.支持扩展，由于分层系统每一层最多和上下两层交互，对于任意一层功能的交互最多只影响其他两层。
+3.支持重用，如果能保证为相邻的层提供一致的接口，他允许系统中同一层的不同实现相互交换使用。（即给同一接口建立不同实现）
+
+缺点
+
+定义一个合适的抽象层次可能会非常困难。比如，实际的通信协议体就很难映射到ISO框架中，因为其中许多协议跨多个层。
+
+
+
+##### 例子
+
+##### 1. **Partitioning in non-overlapping units**
+
+<img src=".\image\Design_Pattern\image-20221120170644203.png" alt="image-20221120170644203" style="zoom:50%;" />
+
+##### 2. Communication Stack
+
+<img src=".\image\Design_Pattern\image-20221120170909445.png" alt="image-20221120170909445" style="zoom:50%;" />
+
+##### 3. Virtual Machine
+
+<img src=".\image\Design_Pattern\image-20221120171006612.png" alt="image-20221120171006612" style="zoom:50%;" />
+
+##### 4. 3-tier client-server
+
+<img src=".\image\Design_Pattern\image-20221120171313720.png" alt="image-20221120171313720" style="zoom:50%;" />
+
+##### 5. Quality Factors
+
+![image-20221120171345029](.\image\Design_Pattern\image-20221120171345029.png)
+
+
+
+### 3. Independent Compone
+
+#### Event System
+
+<img src=".\image\Design_Pattern\image-20221120171927902.png" alt="image-20221120171927902" style="zoom:50%;" />
+
+<img src=".\image\Design_Pattern\image-20221120171943598.png" alt="image-20221120171943598" style="zoom:50%;" />
+
+<img src=".\image\Design_Pattern\image-20221120172005580.png" alt="image-20221120172005580" style="zoom:50%;" />
+
+**优缺点：**
+
+<img src=".\image\Design_Pattern\image-20221120172029758.png" alt="image-20221120172029758" style="zoom:80%;" />
+
+**主要特点**
+
+1.事件的触发者并不知道哪些构件会被这些事件影响，相互保持独立。
+2.不能假定构件的处理顺序，甚至不知道哪些过程会被调用。
+3.各个构件之间彼此之间无连接关系，各自独立存在，通过对事件的发布和注册实现关联。
+
+<img src=".\image\Design_Pattern\image-20221122084437391.png" alt="image-20221122084437391" style="zoom:50%;" />
+
+##### 事件系统派遣机制
+
+<img src=".\image\Design_Pattern\image-20221122092026704.png" alt="image-20221122092026704" style="zoom:50%;" />
+
+
+
+
+
+###### 无独立调度模块的事件系统Observable/Observer
+
+
+
+This module is usually called Observable/Observer (被观察者/观察者).
+
+Each module allows other modules to declare interest in events that they are sending. (每一个模块都允许其他模块向自己所能发送的某些消息表明兴趣)
+
+Whenever a module sends an event, it sends that event toexactly those modules that registered interest in that event.
+
+(当某一模块发出某一事件时，它自动将这些事件发布给那些曾经向自己注册过此事件的模块)
+
+![image-20221122092357856](.\image\Design_Pattern\image-20221122092357856.png)
+
+
+
+
+
+###### 有独立事件派遣模块的事件系统
+
+
+
+事件派遣模块是负责接收到来的事件并派遣它们到其它模块。
+
+事件派遣模块分为两种:**全广播式和选择广播式**
+
+全广播式(All broadcasting) ：派遣模块将事件广播到所有的模块，但只有感兴趣的模块才去取出事件并触发自身的行为；
+
+选择广播式(Selected broadcasting) ：派遣模块将事件送到那些已经注册的模块中。
+
+
+
+![image-20221122092547567](.\image\Design_Pattern\image-20221122092547567.png)
+
+
+
+![image-20221122092609853](.\image\Design_Pattern\image-20221122092609853.png)
+
+
+
+
+
+**选择广播式的两种策略：**基于事件被执行的方式
+
+
+
+Point-to-Point (message queue)(点对点模式：基于消息队列)
+
+Publish-Subscribe(发布-订阅模式)
+
+
+
+<img src=".\image\Design_Pattern\image-20221122092706296.png" alt="image-20221122092706296" style="zoom:80%;" />
+
+<img src=".\image\Design_Pattern\image-20221122092743185.png" alt="image-20221122092743185" style="zoom:80%;" />
+
+
+
+
+
+**例子：**
+
+1.调试器中的断点处理：
+
+<img src=".\image\Design_Pattern\image-20221122091825647.png" alt="image-20221122091825647" style="zoom: 80%;" />
+
+2.美团平台
+
+<img src=".\image\Design_Pattern\image-20221122091954833.png" alt="image-20221122091954833" style="zoom:50%;" />
+
+### 以下为非考纲要求:
+
+#### 1.**C2 体系结构风格**
+
+惯用模式：
+
+C2结构是一个层次网络，包括构件和连接件两种软件元素。构件和连接键都是包含顶部和底部的软件元素。构件和构件之间只能通过连接件进行连接，而连接件之间则可以直接进行连接。构件的顶部、底部分别与连接件的底部、顶部连接，连接件的顶部、底部也分别与连接件的底部、顶部连接。
+
+在C2体系结构中，构件之间的所有通信必须使用消息传递机制来实现。构件之间所有传递的信息可以分为两种，一种是向上层构件发出服务请求的请求消息，另一种是向下层构件发出指示状态变化的通知消息。连接件负责消息的过滤、路由、广播、通信和相关处理。
+
+原理图：
+
+<img src="C:\Users\Administrator\Desktop\github repo\Learing_note\image\Design_Pattern\image-20221122093736938.png" alt="image-20221122093736938" style="zoom: 67%;" />
+
+优点：
+
+1. 可以使用任何编程语言来开发构件，构件重用和替换比较容易实现
+2. 具有一定的扩展能力，可以有多种不同粒度的构件
+3. 构件不需要共享地址空间，避免了共享全局变量所造成的复杂关系
+4. 具有良好的适应性
+5. 在C2体系结构中，可以使用多个工具集和多种媒体类型，能够动态地更新系统的框架结构
+
+缺点：
+
+1. 构件和构件之间不允许直接相连
+2. 与某一个连接件相关联的构件和连接件的数目没有限制
+
+#### 2. 数据共享体系结构风格(仓库风格)
+
+定义：
+
+数据共享风格也称为仓库风格。
+
+在这种风格中，有两种不同类型的软件元素：
+
+一种是**中央数据单元**，也成为资源库，用于表示系统的当前状态；
+
+另一种是**相互依赖的构件组**，这些构件可以对中央数据单元实施操作。中央数据单元和构件之间可以进行信息交换，这是数据共享体系结构的技术实现基础。
+
+根据所使用的控制策略不同，**数据共享体系结构可以分为两种类型，一种是传统的数据库，另一种是黑板。**
+
+如果由输入流中的事件来驱动系统进行信息处理，把执行结构存储到中央数据单元，则这个系统就是数据库应用系统。
+
+如果由中央数据单元的当前状态来驱动系统运行，则这个系统就是黑板应用系统。
+
+**黑板是数据共享体系结构的一个特例，用以解决状态冲突并处理可能存在的不确定性知识源。**
+
+黑板常用于信号处理，如语音和模式识别，同时在自然语言处理领域中也有广泛的应用，如机器翻译和句法分析。
+
+ 
+
+原理图：
+
+一个典型的黑板系统主要包括知识源、中央控制单元、控制单元。
+
+<img src="C:\Users\Administrator\Desktop\github repo\Learing_note\image\Design_Pattern\image-20221122093932060.png" alt="image-20221122093932060" style="zoom: 80%;" />
+
+优点：
+
+1. 便于多客户共享大量数据，而不必关心数据是何时产生的、由谁提供的及通过何种途径来提供
+2. 便于将构件作为知识源添加到系统中来
+
+缺点：
+
+1. 对共享数据结构，不同知识源要达成一致
+2. 需要同步机制和加锁机制来保证数据的完整性和一致性，增大了系统设计的复杂度
+
+
+
+#### 3.**解释器 体系结构风格**
+
+惯用模式：
+
+解释器作为一种体系结构，主要用于构建虚拟机，用以弥合程序语义和计算机硬件之间的间隙。实际上，解释器是利用软件来创建的一种虚拟机，因此，解释器风格又被称为虚拟机风格。
+
+原理图：
+
+<img src="C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20221122095530856.png" alt="image-20221122095530856" style="zoom:80%;" />
+
+优点：
+
+能够提高应用程序的抑制能力和变成语言的跨平台移植能力。
+实际测试工作可能费城复杂，测试代价极其昂贵，具有一定的风险性。
+缺点：
+
+由于使用了特定了语言和自定义操作规则，因此增加了系统运行的开销。
+解释器系统难以设计和测试。
+
+#### 4.**反馈控制环 体系结构风格**
+
+定义：
+
+反馈控制环是一种特定的数据流结构。传统数据流结构是线性的，而控制连续循环过程的体系结构应该是环形的。
+
+反馈控制环系统主要包括以下三个部分：
+
+过程，指操纵过程变量的相关机制。
+数据元素，指连续更新的过程变量，包括输入变量、控制变量、操纵变量和相关参考值。
+控制器，通过控制规则来修正变量，收集过程的实际状态和目标状态，调节变量以驱动实际状态朝目标状态前进。
+
+
+原理图：
+
+<img src="C:\Users\Administrator\Desktop\github repo\Learing_note\image\Design_Pattern\image-20221122095832525.png" alt="image-20221122095832525" style="zoom:80%;" />
+
+优点：
+
+过程控制是连续的，可以利用各种构件和相关规则来设计反馈控制环系统，实现各种功能。
+反馈控制环结构能够处理复杂的自适应问题，机器学习就是一个例子。
+
+#### 5.**C/S 体系结构风格**
+
+原理图：
+
+<img src="C:\Users\Administrator\Desktop\github repo\Learing_note\image\Design_Pattern\image-20221122095952070.png" alt="image-20221122095952070" style="zoom:80%;" />
+
+
+
+<img src="C:\Users\Administrator\Desktop\github repo\Learing_note\image\Design_Pattern\image-20221122100103666.png" alt="image-20221122100103666" style="zoom:80%;" />
+
+
+
+优点：
+
+客户机构件和服务器构件分别运行在不同的计算机上，有利于分布式数据的组织和处理。
+构件之间的位置是相互透明的，客户机程序和服务器程序都不必考虑对方的实际存储位置。
+客户机侧重数据的显示和分析，服务器则注重数据的管理。
+构件之间是彼此独立和充分隔离的。
+将大规模的业务逻辑分布到多个通过网络连接的低成本的计算机，降低了系统的整体开销。
+
+缺点：
+
+开发成本较高。
+在开发C/S结构系统时，大部分工作都都集中在客户机程序的设计上，增加了设计的复杂度。
+信息内容和形式单一。
+如果对C/S体系结构的系统进行升级，开发人员需要到现场来更新客户机程序，同时需要对运行环境进行重新配置，增加了维护费用。
+两层C/S结构采用了单一的服务器，同时以局域网为中心，因此难以扩展到Intranet和Internet。
+数据安全性不高。
+
+#### **6.B/S 体系结构风格**
+
+惯用模式：
+
+B/S结构是三层C/S体系结构的一种实现方式，主要包括浏览器，Web服务器和数据库服务器。B/S结构主要利用不断成熟的WWW技术，结合浏览器的多脚本语言，采用通用浏览器来实现原来需要复杂的专用软件才能实现的强大功能，节约了开发成本。
+
+B/S体系结构的核心是Web服务器，可以将应用程序以网页的形式存放在Web服务器上。
+
+当用户运行某个应用程序时，只需要在可以断的浏览器中输入响应的 URL，向 Web 服务器提出 HTTP 请求。
+
+当Web 服务器接收 HTTP 请求之后，会调用相关的应用程序（Servlets），同时向数据库服务器发送数据操作请求。
+
+数据库服务器对数据操作请求进行响应，将结果返回给Web服务器的应用程序。
+
+Web服务器应用程序执行业务处理逻辑，利用 HTML 来封装操作结果，通过浏览器呈现给用户。在B/S结构中，数据请求、王爷生成、数据库访问和应用程序执行全部由Web 服务器来完成。
+
+原理图：
+
+<img src="C:\Users\Administrator\Desktop\github repo\Learing_note\image\Design_Pattern\image-20221122101714095.png" alt="image-20221122101714095" style="zoom:80%;" />
+
+优点：
+
+1. 客户端只需要安装浏览器，操作简单。
+2. 运用HTTP标准协议和统一客户端软件，能够实现跨平台通信。
+3. 开发成本比较低，只需要维护Web服务器程序和中心数据库。
+
+缺点：
+
+1. 个性化程度比较低，所有客户端程序的功能都是一样的。
+2. 客户端数据处理能力比较差。
+3. 在B/S结构的系统中，数据提交一般以页面为单位，动态交互性不强，不利于在线事务处理。
+4. B/S体系结构的可扩展性比较差，系统安全性难以保障。
+5. B/S结构的应用系统查询中心数据库，其速度要远低于C/S体系结构。
+
+#### 7.**公共对象请求代理（CORBA）体系结构风格**
+
+惯用模式：
+
+公共对象请求代理（Common Object Request Broker Architecture，CORBA）是由对象管理组织（Object Management Group，OMG）提出来的，是一套完整的对象技术规范，其核心包括标准语言、接口和协议。
+
+在异构分布式环境下，可以利用CORBA来实现应用程序之间的交互操作，同时，CORBA也提供了独立于开发平台的编程语言的对象重用方法。
+
+ 
+
+原理图：
+
+<img src="C:\Users\Administrator\Desktop\github repo\Learing_note\image\Design_Pattern\image-20221122101824999.png" alt="image-20221122101824999" style="zoom:50%;" />
+
+优点：
+
+1. 实现了客户端程序与服务器程序的分析。
+2. 将分布式计算模式与面向对象技术结合起来，提高了软件复用率。
+3. 提供了软件总线机制，软件总线是指一组定义的完整的接口规范。
+4. CORBA能够支持不同的编程语言和操作系统，在更大的范围内，开发人员能够相互利用已有的开发成果。
+
+#### 8.**正交 体系结构风格**
+
+惯用模式：
+
+正交体系结构是一种以 垂直线索构件族 为基础的层次化结构，包括组织层和线索。
+
+在每一个组织层中，都包含具有相同抽象级别的构件。
+
+线索是子系统的实例，是由完成不同层次功能的构件通过相互调用而形成的，每一条线索完成系统的一部分相对独立的功能。
+
+在正交体系结构中，每条线索的实现与其他线索的实现无关或关联很少。在同一层次中，构件之间不存在相互调用关系。
+
+原理图：
+
+<img src="C:\Users\Administrator\Desktop\github repo\Learing_note\image\Design_Pattern\image-20221122162054327.png" alt="image-20221122162054327" style="zoom:80%;" />
+
+优点：
+
+1. 结构清晰。
+2. 便于修改和维护。
+3. 易于重用。
+
+#### 9. MVC 体系结构风格
+
+惯用模式：
+
+模型-视图-控制器（Model-View-Controller，MVC）是一种常见的体系结构风格。MVC被广泛应用与用户交互程序的设计中。
+
+原理图：
+
+<img src="C:\Users\Administrator\Desktop\github repo\Learing_note\image\Design_Pattern\image-20221122162922343.png" alt="image-20221122162922343" style="zoom:80%;" />
+
+优点：
+
+1. 多个视图与一个模型相对应
+2. 具有良好的移植性。
+3. 系统被分割为三个独立的部分，当功能发生变化时，改变其中的一个部分就能够满足要求。
+
+缺点：
+
+1. 增加了系统设计和运行复杂性。
+2. 视图与控制器连接过于紧密，妨碍两者的独立复用。
+3. 视图访问模型的效率比较低。
+
+
+
+## RChain 区块链
+
+### 智能合约
+
+定义:一个智能合约是一套以数字形式定义的承诺（commitment），包括合约参与方可以在上面执行这些承诺的协议。
+
