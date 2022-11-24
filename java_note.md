@@ -5801,7 +5801,54 @@ MVC模式使开发和维护用户接口的技术含量降低。
 
 ### 12 解释器模式
 
+给定一个语言，定义它的文法的一种表示，并定义一个解释器，这个解释器使用该表示来解释语言中的句子
 
+常被用在 SQL 解析、符号处理引擎
+
+**abstract**
+
+```kotlin
+interface Expression {
+    fun interpret(context: String): Boolean
+}
+```
+
+**implementation**
+
+```kotlin
+class AndExpression(val exp1: Expression, val exp2: Expression): Expression {
+    override fun interpret(context: String): Boolean {
+        return exp1.interpret(context)&&exp2.interpret(context)
+    }
+}
+
+class OrExpression(val exp1: Expression, val exp2: Expression): Expression {
+    override fun interpret(context: String): Boolean {
+        return exp1.interpret(context)||exp2.interpret(context)
+    }
+}
+
+class NotExpression(val exp: Expression): Expression {
+    override fun interpret(context: String): Boolean {
+        return !exp.interpret(context)
+    }
+}
+
+class MetaExpression(val data: String): Expression {
+    override fun interpret(context: String): Boolean {
+        return context.contains(data)
+    }
+}
+
+fun interpretDemo() {
+    val rick = MetaExpression("rick")
+    val morty = MetaExpression("morty")
+    println(NotExpression(rick).interpret("rick"))
+    println(AndExpression(rick,morty).interpret("rick and morty"))
+    println(AndExpression(rick,NotExpression(morty)).interpret("rick and morty"))
+    // false,true,false
+}
+```
 
 ### 13 生成器模式(以下模式考试不要求)
 
@@ -5917,21 +5964,648 @@ public class Director {
 
 ### 14 命令模式
 
+数据驱动
 
+以**命令**（Command）的形式包裹请求，并传给**调用对象**（Invoker）。调用对象寻找可以处理该命令的**合适的对象**（Receiver）来执行命令。
+
+**abstract**
+
+```kotlin
+interface Command {
+    fun execute(receiver: Receiver) {
+        receiver.exec()
+    }
+}
+
+interface Receiver {
+    fun exec()
+}
+
+interface Invoker {
+    val commands: ArrayList<Command>
+    fun addCommand(command: Command) {
+        commands.add(command)
+    }
+    fun executeCommands()
+}
+```
+
+**implementation**
+
+```kotlin
+class Gardening: Command
+
+class Cleaning: Command
+
+class Cleaner: Receiver {
+    override fun exec() {
+        println("The house had been cleaned.")
+    }
+}
+
+class Gardener: Receiver {
+    override fun exec() {
+        println("The garden had been taken care of.")
+    }
+
+}
+
+class Butler(override val commands: ArrayList<Command>) : Invoker {
+    private val gardener = Gardener()
+    private val cleaner = Cleaner()
+    override fun executeCommands() {
+        commands.forEach{ command ->
+            when(command) {
+                is Gardening -> command.execute(gardener)
+                is Cleaning -> command.execute(cleaner)
+            }
+            println()
+        }
+        commands.clear()
+    }
+}
+
+fun commandDemo() {
+    val butler = Butler(ArrayList())
+    butler.addCommand(Gardening())
+    butler.addCommand(Cleaning())
+    butler.executeCommands()
+}
+```
 
 ### 15 状态模式
 
+将各状态对应逻辑分拆到不同的状态类中，以达到**易于拓展新状态**的目的。
 
+存在各种状态State的和一个管理状态切换的 Context 
+
+**abstract**
+
+```kotlin
+interface State {
+    fun action()
+}
+
+interface  Context {
+    var currentState: State
+    fun action() {
+        currentState.action()
+    }
+}
+```
+
+**implementation**
+
+```kotlin
+class QianJiSan(override var currentState: State) : Context
+
+class ShieldForm: State {
+    override fun action() {
+        println("ShieldForm")
+        println("defense")
+    }
+}
+
+class SwordForm: State {
+    override fun action() {
+        println("SwordForm")
+        println("fight")
+    }
+}
+
+fun stateDemo() {
+    val swordForm = SwordForm()
+    val shieldForm = ShieldForm()
+    val qianJiSan = QianJiSan(swordForm)
+    qianJiSan.action()
+    qianJiSan.currentState = shieldForm
+    qianJiSan.action()
+}
+```
 
 ### 16 桥接模式
 
+又称为柄体(Handle and Body)模式或接口(Interfce)模式
+
+将抽象接口作为抽象化和实现化之间的桥接结构，把**抽象化与实现化解耦**，使得实体类的功能独立于接口实现类，使得二者可以**独立变化**。避免有多种可能会变化的情况下直接继承带来的子类爆炸问题，提高扩展的灵活性。
+
+**abstract**
+
+```kotlin
+interface Bridge {
+    fun func()
+}
+
+interface Entity {
+    val bridge: Bridge
+    fun func()
+}
+```
+
+**implementation**
+
+```kotlin
+abstract class Mecha(override val bridge: EnergyCore) : Entity {
+    internal abstract fun statement()
+    override fun func() {
+        statement()
+        bridge.func()
+        println()
+    }
+}
+
+//不同机甲型号可搭配不同能源核心，使得二者均易于拓展
+class MechaI(core: EnergyCore): Mecha(bridge = core) {
+    override fun statement() {
+        println("MechaI")
+    }
+}
+
+class MechaV(core: EnergyCore): Mecha(bridge = core) {
+    override fun statement() {
+        println("MechaV")
+    }
+}
+
+class MechaX(core: EnergyCore): Mecha(bridge = core) {
+    override fun statement() {
+        println("MechaX")
+    }
+}
+
+interface EnergyCore: Bridge
+
+class SolarEnergyCore: EnergyCore {
+    override fun func() {
+        println("solar energy is transforming into power")
+    }
+}
+
+class WindEnergyCore: EnergyCore {
+    override fun func() {
+        println("wind energy is transforming into power")
+    }
+}
+
+fun bridgeDemo() {
+    MechaI(WindEnergyCore()).func()
+    MechaI(SolarEnergyCore()).func()
+    MechaV(WindEnergyCore()).func()
+    MechaV(SolarEnergyCore()).func()
+    MechaX(WindEnergyCore()).func()
+    MechaX(SolarEnergyCore()).func()
+}
+```
+
+### 17 组合模式
+
+又称为**部分整体模式**，依据树形结构来组合对象，创建了一个包含自己对象组的类，把**一组**相似的对象当作一个单一的对象处理。使得用户对单个对象和组合对象的使用具有**一致性**。
+
+**abstract**
+
+```kotlin
+interface Composite {
+    val composites: ArrayList<Composite>
+}
+```
+
+**implementation**
+
+```kotlin
+interface HTMLElement: Composite {
+    val content: String
+    fun toHTML() {
+        composites.forEach { it ->
+            (it as HTMLElement).toHTML()
+        }
+    }
+}
+
+class HTML(override val content: String = "",override val composites: ArrayList<Composite> = ArrayList()) : HTMLElement {
+    override fun toHTML() {
+        println("<html>")
+        super.toHTML()
+        println("</html>")
+    }
+}
+
+class Body(override val content: String = "",override val composites: ArrayList<Composite> = ArrayList()) : HTMLElement {
+    override fun toHTML() {
+        println("<body>")
+        super.toHTML()
+        println("</body>")
+    }
+}
+
+class H1(override val content: String = "",override val composites: ArrayList<Composite> = ArrayList()) : HTMLElement {
+    override fun toHTML() {
+        println("<h1> $content </h1>")
+    }
+}
+
+class P(override val content: String = "",override val composites: ArrayList<Composite> = ArrayList()) : HTMLElement {
+    override fun toHTML() {
+        println("<p> $content </p>")
+    }
+}
+
+fun compositeDemo() {
+    val html = HTML()
+    val body = Body()
+    body.composites.add(H1("header"))
+    body.composites.add(P("a paragraph"))
+    body.composites.add(P("another paragraph"))
+    html.composites.add(body)
+    html.toHTML()
+}
+```
+
+### 18 原型模式
+
+用于创建重复的对象，利用已有的一个原型对象，通过**复制**快速地生成和原型对象一样的实例，同时又能保证性能，当直接创建对象的代价比较大时，则可采用这种模式。
+
+**abstract**
+
+```kotlin
+interface Content {
+    fun copy(): Content
+}
+
+interface Prototype {
+    val content: Content
+    fun clone(): Content
+}
+```
+
+**implementation**
+
+```kotlin
+//仿生人
+class Android: Content {
+    override fun copy(): Content {
+        println("new android had been manufactured")
+        return Android()
+    }
+}
+
+class AndroidPrototype(override val content: Android) : Prototype {
+    override fun clone(): Content {
+        return content.copy()
+    }
+}
+
+fun prototypeDemo() {
+    val androidPrototype = AndroidPrototype(Android())
+    val nAndroid: Android = androidPrototype.clone() as Android
+}
+```
+
+### 19 外观模式
+
+对外隐藏具有诸多子系统的系统的复杂性，只提供一个可以访问系统的接口
+
+**abstract**
+
+```kotlin
+interface Facade {
+    val subsystems: ArrayList<Subsystem>
+    fun react()
+}
+
+interface Subsystem{
+    fun react()
+}
+```
+
+**implementation**
+
+```kotlin
+class ForeignAffairsMinistry: Subsystem{
+    override fun react() {
+        println("The Ministry of Foreign Affairs intervened")
+    }
+}
+
+class NationalDefenseMinistry: Subsystem{
+    override fun react() {
+        println("The Ministry of Defense conducts military mobilization")
+    }
+}
+
+class Government(override val subsystems: ArrayList<Subsystem> = ArrayList()) : Facade {
+    private val foreignAffairsMinistry: ForeignAffairsMinistry = ForeignAffairsMinistry()
+    private val nationalDefenseMinistry: NationalDefenseMinistry = NationalDefenseMinistry()
+
+    override fun react() {
+        if((1..2).random()<2){
+            foreignAffairsMinistry.react()
+        }else nationalDefenseMinistry.react()
+    }
+}
+```
+
+### 20 享元模式
+
+通过工厂方法尝试重用现有的同类对象以减少创建对象的数量，以减少内存占用和提高性能，如果未找到匹配的对象，则创建新对象
+
+在实际应用中，享元模式主要应用于**缓存**
+
+> vs. Singleton
+>
+> 单例模式是类级别的，一个类**只能有一个**对象实例；
+>
+> 享元模式是对象级别的，**可以有多个**对象实例，并允许多个变量引用同一个对象实例；
+
+**abstract**
+
+```kotlin
+interface FlyWeight
+
+interface FlyWeightEnum
+
+interface FlyWeightFactory {
+    val map: Map<FlyWeightEnum,FlyWeight>
+    fun getFlyWeight(flyWeightEnum: FlyWeightEnum): FlyWeight
+}
+```
+
+**implementation**
+
+```kotlin
+enum class FaithOfTheSeven: FlyWeightEnum {
+    Father,
+    Mother,
+    Warrior,
+    Smith,
+    Maiden,
+    Crone,
+    Stranger
+}
+
+class Deity(private val priesthood: FaithOfTheSeven = FaithOfTheSeven.Father): FlyWeight {
+    fun answerPrayer() {
+        println("$priesthood answered the prayer")
+        println()
+    }
+}
+
+class Church(override val map: HashMap<FlyWeightEnum, Deity> = HashMap()) : FlyWeightFactory {
+    override fun getFlyWeight(flyWeightEnum: FlyWeightEnum): Deity {
+        if (!map.containsKey(flyWeightEnum)) {
+            map[flyWeightEnum] = Deity(flyWeightEnum as FaithOfTheSeven)
+            println("$flyWeightEnum was awakened")
+        }
+        return map.getOrDefault(flyWeightEnum, Deity())
+    }
+
+    fun pray(flyWeightEnum: FlyWeightEnum) {
+        println("The believers prayed")
+        getFlyWeight(flyWeightEnum).answerPrayer()
+    }
+}
+```
+
+### 21 责任链模式
+
+责任链
+
+> 使多个对象都有机会处理请求，从而避免请求的发送者和接收者之间的耦合关系。将这些对象连成一条链，并沿着这条链传递该请求，直到有一个对象处理它为止。
+
+责任链模式（Chain of Responsibility）是一种处理请求的模式，它让多个处理器都有机会处理该请求，直到其中某个处理成功为止。责任链模式把多个处理器串成链，然后让请求在链上传递
+
+责任链模式（Chain of Responsibility Pattern）为请求创建了一个接收者对象的链。这种模式给予请求的类型，对请求的发送者和接收者进行解耦。这种类型的设计模式属于行为型模式。
+
+在这种模式中，通常每个接收者都包含对另一个接收者的引用。如果一个对象不能处理该请求，那么它会把相同的请求传给下一个接收者，依此类推。
+
+**abstract**
+
+```kotlin
+interface Handler {
+    val nextHandler: Handler?
+    val authority: Priority
+    fun handle(priority: Priority)
+}
+
+interface Priority
+```
+
+**implementation**
+
+```kotlin
+enum class Vampire: Priority {
+    Baron,
+    Vicomte,
+    Comte,
+    Marquess,
+    Duke,
+    Infante
+}
+
+interface Priest: Handler {
+    val name: String
+    override val authority: Vampire
+    override val nextHandler: Priest?
+    override fun handle(priority: Priority) {
+        if ((priority as Vampire)<=authority) {
+            println("$priority wad purified")
+        println()
+        } else {
+            println("request ${nextHandler?.name?:"god"} to process")
+            nextHandler?.handle(priority)
+        }
+    }
+}
+
+//三种神职人员
+class Monk(override val nextHandler: Priest, override val name: String = "monk", override val authority: Vampire = Vampire.Vicomte) : Priest {}
+
+class Bishop(override val nextHandler: Priest, override val name: String = "bishop", override val authority: Vampire = Vampire.Marquess) : Priest {}
+
+class Pope(override val name: String = "pope", override val authority: Vampire = Vampire.Duke, override val nextHandler: Priest? = null) : Priest {}
 
 
-### 
+fun chainOfResponsibilityDemo(){
+    val pope = Pope()
+    val bishop = Bishop(pope)
+    val monk = Monk(bishop)
+    monk.handle(Vampire.Duke)
+    monk.handle(Vampire.Infante)
+}
+```
 
+### 22 迭代器模式
 
+提供一种无需对外暴露集合对象的内部表示就能就遍历集合对象元素的方法
 
+分离了集合对象的遍历行为，把遍历元素责任交给迭代器，而不是集合对象
 
+**abstract**
+
+```kotlin
+interface Iterator {
+    fun hasNext(): Boolean
+    fun next(): Any
+}
+
+interface Container {
+    fun iterator(): Iterator
+}
+```
+
+**implementation**
+
+```kotlin
+class Virtue: Container {
+    val virtues: ArrayList<String> = arrayListOf("Chastity","Diligence","Charity","Humility","Patience","Temperance")
+    inner class VirTueIterator: Iterator {
+        var cur: Int = 0
+        override fun hasNext(): Boolean {
+            return cur<virtues.size
+        }
+
+        override fun next(): String {
+            return virtues[cur++]
+        }
+    }
+    override fun iterator(): Iterator {
+        return VirTueIterator()
+    }
+}
+```
+
+### 23 中介模式
+
+用一个中介对象来处理不同类/对象之间的通信，把多方会谈变成双方会谈，以降低多个类之间的通信复杂性。
+
+中介者使各个类不需要显式地相互引用，从而使其耦合松散，而且可以独立地改变它们之间的交互。
+
+**abstract**
+
+```kotlin
+interface Mediator {
+    val communicators: ArrayList<Communicator>
+    fun deliver(message: Message)
+}
+
+interface Message
+
+interface Communicator {
+    val mediator: Mediator
+    fun sendMessage(message: Message, receiver: Communicator)
+    fun receiveMessage(message: Message, sender: Communicator) = {}
+}
+```
+
+**implementation**
+
+```kotlin
+data class ChatMessage(val content: String) : Message
+
+class ChatRoom(override val communicators: ArrayList<Communicator> = ArrayList()) : Mediator {
+    override fun deliver(message: Message) {
+        println((message as ChatMessage).content)
+        println()
+    }
+}
+
+class ChatUser(val name: String, override val mediator: ChatRoom) : Communicator {
+    override fun sendMessage(message: Message, receiver: Communicator) {
+        println("$name send a message to ${(receiver as ChatUser).name}")
+        mediator.deliver(message)
+    }
+}
+```
+
+### 24 备忘录模式
+
+在不破坏封装性的前提下，在某对象之外保存该对象的内部状态，以便在适当的时候恢复对象
+
+**abstract**
+
+```kotlin
+interface Originator {
+    var states: States
+    fun save(): Memonto
+    fun load(memonto: Memonto)
+}
+
+interface States {}
+
+interface Memonto {
+    val states: States
+    fun load(): States {return states}
+}
+```
+
+**implementation**
+
+```kotlin
+data class GameStates(val level: Int, val stage: Int): States
+
+class GameArchive(override val states: States) : Memonto
+
+class Game(override var states: States = GameStates(1,1)) : Originator {
+    override fun save(): Memonto {
+        println("game archive is saved")
+        return GameArchive(states)
+    }
+
+    override fun load(memonto: Memonto) {
+        states = memonto.states
+        println("game archive is loaded")
+    }
+}
+
+fun memontoDemo() {
+    val game = Game()
+    val archi = game.save()
+    game.load(archi)
+}
+```
+
+### 25 模板方法模式
+
+一个抽象类/接口公开定义了执行它的方法的模板“骨架”。它的子类可以按需要重写方法实现，但调用将以抽象类中定义的方式进行。
+
+**abstract**
+
+```kotlin
+abstract class Template {
+    protected abstract fun first()
+    protected abstract fun second()
+    protected abstract fun last()
+    final fun steps() {
+        first()
+        second()
+        last()
+    }
+}
+```
+
+**implementation**
+
+```kotlin
+class Human: Template() {
+    override fun first() {
+        println("birth")
+    }
+
+    override fun second() {
+        println("aging")
+    }
+
+    override fun last() {
+        println("death")
+    }
+}
+
+fun templateDemo() {
+    val human = Human()
+    human.steps()
+}
+```
+
+> Reactor与MVC不属于23种经典设计模式
 
 ## Java软件体系结构
 
